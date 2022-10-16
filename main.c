@@ -1,6 +1,7 @@
 #include <stdio.h>
 
 int add(int a, int b);
+int sub(int a, int b);
 int mod(int a, int b);
 int Gop(int a, int b);
 
@@ -13,7 +14,7 @@ int main ()
   scanf("%d%c%d", &n, &op, &m);
   
   if(op=='+') printf("답: %d", add(n,m));
-  else if(op=='-') printf("답: %d", );
+  else if(op=='-') printf("답: %d", sub(n,m) );
   else if(op=='*') printf("답: %d", Gop(n,m));
   else if(op=='/') printf("답: %d",mod(n,m));
   else printf("다시 입력해주세요.");
@@ -23,6 +24,9 @@ int main ()
 
 int add(int a, int b){
   return a+b;
+}
+int sub(int a, int b){
+  return a-b;
 }
 int mod(int a, int b){
   return a/b;
