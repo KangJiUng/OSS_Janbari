@@ -1,36 +1,71 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <Windows.h>
 
-int add(int a, int b);
-int sub(int a, int b);
-int mod(int a, int b);
-int Gop(int a, int b);
+int* CreateRandomNums() {
+	static int ranNums[4];
+	int Check;
 
-int main ()
-{
-  int n, m;
-  char op;
-  
-  printf("두 정수의 연산식을 입력해주세요.(ex: 2+6): ");
-  scanf("%d%c%d", &n, &op, &m);
-  
-  if(op=='+') printf("답: %d", add(n,m));
-  else if(op=='-') printf("답: %d", sub(n,m) );
-  else if(op=='*') printf("답: %d", Gop(n,m));
-  else if(op=='/') printf("답: %d",mod(n,m));
-  else printf("다시 입력해주세요.");
-    
-  return 0;
+	for (int i = 0; i < 4; i++) {
+		Check = 0;
+		ranNums[i] = rand() % 10;
+	}
+	return ranNums;
 }
 
-int add(int a, int b){
-  return a+b;
+void GetStrikeAndBall(int n1[4], int n2[4], int* strike, int* ball) {
+	for (int i = 0; i < 4; i++) {
+		for (int j = 0; j < 4; j++) {
+			if (i == j && n1[i] == n2[j]) {
+				*strike = *strike + 1;
+				break;
+			}
+			else if (n1[i] == n2[j]) {
+				*ball = *ball + 1;
+				break;
+			}
+		}
+	}
 }
-int sub(int a, int b){
-  return a-b;
-}
-int mod(int a, int b){
-  return a/b;
-}
-int Gop(int a, int b){
-  return a*b;
+
+void Baseball_main() {
+	int* ranNums;
+	int answer[4];
+	int strike;
+	int ball;
+	int cnt = 1;
+
+	srand((unsigned int)time(NULL));
+
+	ranNums = CreateRandomNums();
+
+	//테스트 코드
+	printf("정답 : ");
+	for (int i = 0; i < 4; i++) {
+		printf("%d", ranNums[i]);
+	}
+	printf("\n");
+
+	while (1) {
+		printf("[%d회차] 4자리 숫자를 입력하세요. ex)1 2 3 4: ", cnt);
+
+		strike = 0;
+		ball = 0;
+
+		scanf_s("%d %d %d %d", &answer[0], &answer[1], &answer[2], &answer[3]);
+
+		GetStrikeAndBall(ranNums, answer, &strike, &ball);
+
+		printf("strike : %d / ", strike);
+		printf("ball : %d\n\n", ball);
+
+		cnt++;
+
+		if (strike == 4) {
+			Beep(380, 500);
+			printf("정답\n");
+			break;
+		}
+	}
 }
