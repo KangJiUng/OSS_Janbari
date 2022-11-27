@@ -2,7 +2,8 @@
 #include <stdlib.h>
 #include <time.h>
 #include <Windows.h>
-#include<conio.h>
+#include <conio.h>
+#define _CRT_SECURE_NO_WARNINGS
 #define DINO_BOTTOM_Y 12
 #define TREE_BOTTOM_Y 20
 #define TREE_BOTTOM_X 45
@@ -198,6 +199,17 @@ int* CreateRandomNums() {
 	for (int i = 0; i < 4; i++) {
 		Check = 0;
 		ranNums[i] = rand() % 10;
+		for (int j = 0; j < i; j++) {
+			if (ranNums[i] == ranNums[j]) {
+				Check = 1;
+				break;
+			}
+		}
+
+		if (Check == 1) {
+			i--;
+			continue;
+		}
 	}
 	return ranNums;
 }
@@ -217,7 +229,11 @@ void GetStrikeAndBall(int n1[4], int n2[4], int* strike, int* ball) {
 	}
 }
 
-void Baseball_main() {
+void textcolor(int colorNum) {
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), colorNum);
+}
+
+void Baseballgame() {
 	int* ranNums;
 	int answer[4];
 	int strike;
@@ -250,10 +266,67 @@ void Baseball_main() {
 
 		cnt++;
 
-		if (strike == 4) {
-			Beep(380, 500);
-			printf("정답\n");
+		if (cnt == 9) {
+			printf("실패");
 			break;
 		}
+		
+		if (strike == 4) {
+			system("cls");
+			printf("\t\t\t\t\t\t\t    정답\n");
+			FILE* fs1;
+			fs1 = fopen("glove.txt", "r");
+			while (feof(fs1) == 0) {
+				char str[20];
+				fgets(str, 20, fs1);
+				printf("%s", str);
+			}
+			Beep(380, 500);
+
+			Sleep(300);
+			system("cls");
+			printf("\t\t\t\t\t\t\t    정답!\n");
+			FILE* fs2;
+			fs2 = fopen("gloveball.txt", "r");
+			while (feof(fs2) == 0) {
+				char str[20];
+				fgets(str, 20, fs2);
+				printf("%s", str);
+			}
+			break;
+		}
+	}
+}
+
+int baseball_main() {
+	printf("\n");
+	printf("\n");
+	textcolor(12);
+	printf("                                  204호                         \n");
+	printf("                              숫자 야구 게임  \n");
+	textcolor(15);
+	printf("\n");
+	printf("=========================================================================\n");
+	printf("\n");
+	printf(" 4자리 랜덤 숫자를 맞히는 게임으로, 각 자리의 숫자는 중복되지 않습니다.\n");
+	printf("              입력한 숫자 중 동일한 숫자가 있으면");
+	textcolor(9);
+	printf(" BALL\n");
+	textcolor(15);
+	printf("                   자릿수까지 동일하면");
+	textcolor(12);
+	printf(" STRIKE\n");
+	textcolor(15);
+	printf("          8번의 기회 안에 숫자를 정확히 맞히면 게임은 끝이 납니다.\n");
+	printf("\n");
+	printf("========================================================================\n");
+	printf("\n");
+	printf("	               계속하려면 Enter를 누르세요..\n");
+	
+	char enter = "\n";
+	scanf("%c", &enter);
+	if (enter == '\n') {
+		system("cls");
+		basenum_main();
 	}
 }
