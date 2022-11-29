@@ -8,6 +8,73 @@
 #define TREE_BOTTOM_Y 20
 #define TREE_BOTTOM_X 45
 
+//-------------------------------방선택화면----------------------------------------
+int roomselect() {
+	int room=0;
+	int c1, c2, c3, c4 = 0;
+	system("mode con:cols=75 lines=20");
+	printf("\n");
+	printf("\n");
+	textcolor(12);
+	printf("\t\t         Janbari Hotel Escape Game\n\n\n");
+	textcolor(15);
+	printf("\t=========== \t=========== \t=========== \t===========\n\n");
+	if (c1 == 0) {
+		textcolor(12);
+		printf("\t    201");
+	}
+	else {
+		textcolor(0);
+		printf("\t    201");
+	}
+	if (c2 == 0) {
+		textcolor(12);
+		printf("\t\t    202");
+	}
+	else {
+		textcolor(0);
+		printf("\t\t    202");
+	}
+	if (c3 == 0) {
+		textcolor(12);
+		printf("\t\t    203");
+	}
+	else {
+		textcolor(0);
+		printf("\t\t    203");
+	}
+	if (c4 == 0) {
+		textcolor(12);
+		printf("\t\t    204\n\n");
+	}
+	else {
+		textcolor(0);
+		printf("\t\t    204\n\n");
+	}
+	textcolor(15);
+	printf("\t=========== \t=========== \t=========== \t===========\n\n\n\n\n");
+
+	if (room == 201) {
+		//201호 게임 함수 호출
+		c1 += 1;
+	}
+	else if (room == 202) {
+		//202호 게임 함수 호출
+		c2 += 1;
+	}
+	else if (room == 203) {
+		//202호 게임 함수 호출
+		c3 += 1;
+	}
+	else if (room == 204) {
+		//202호 게임 함수 호출
+		c4 += 1;
+	}
+	else {
+		//함수재호출?			
+	}
+}
+
 //---------------------------공룡게임----------------------------------------
 //콘솔 창의 크기와 제목을 지정하는 함수
 void SetConsoleView()
