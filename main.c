@@ -21,7 +21,7 @@ int main()
 	printf("3. 공룡게임\n");
 	printf("4. 공룡게임\n");
 	scanf("%d",&count);
-	sing_main();
+	SingGame_main();
 }
 void SetConsoleView()
 {
@@ -374,7 +374,7 @@ void hint(sing_info sing);
 
 sing_info sings[50];
 
-int sing_main() {
+int SingGame_main() {
 	//콘솔 크기 설정
 	system("mode con:cols=55 lines=20");
 	char enter = '\n';
