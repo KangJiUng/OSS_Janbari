@@ -11,7 +11,7 @@
 //-------------------------------방선택화면----------------------------------------
 int roomselect() {
 	int room=0;
-	int c1, c2, c3, c4 = 0;
+	int c1=0, c2=0, c3=0, c4 = 0;
 	system("mode con:cols=75 lines=20");
 	printf("\n");
 	printf("\n");
