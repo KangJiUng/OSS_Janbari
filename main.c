@@ -314,7 +314,7 @@ void Baseballgame() {
 		
 		if (strike == 4) {
 			system("cls");
-			printf("\n\n\t\t\t\t   정답\n");
+			printf("\n\t\t\t\t   정답\n");
 			FILE* fs1;
 			fs1 = fopen("glove.txt", "r");
 			while (feof(fs1) == 0) {
@@ -326,7 +326,7 @@ void Baseballgame() {
 
 			Sleep(300);
 			system("cls");
-			printf("\n\n\t\t\t\t   정답\n");
+			printf("\n\t\t\t\t   정답\n");
 			FILE* fs2;
 			fs2 = fopen("gloveball.txt", "r");
 			while (feof(fs2) == 0) {
