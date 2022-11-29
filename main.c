@@ -314,7 +314,7 @@ void Baseballgame() {
 		
 		if (strike == 4) {
 			system("cls");
-			printf("\t\t\t\t\t\t\t    정답\n");
+			printf("\n\n\t\t\t\t   정답\n");
 			FILE* fs1;
 			fs1 = fopen("glove.txt", "r");
 			while (feof(fs1) == 0) {
@@ -326,7 +326,7 @@ void Baseballgame() {
 
 			Sleep(300);
 			system("cls");
-			printf("\t\t\t\t\t\t\t    정답!\n");
+			printf("\n\n\t\t\t\t   정답\n");
 			FILE* fs2;
 			fs2 = fopen("gloveball.txt", "r");
 			while (feof(fs2) == 0) {
@@ -340,38 +340,38 @@ void Baseballgame() {
 }
 
 int baseball_main() {
-    system("mode con:cols=55 lines=20");
-    printf("\n");
-    printf("\n");
-    textcolor(12);
-    printf("\t\t\t 204호\n");
-    printf("\t\t    숫자 야구 게임  \n");
-    textcolor(15);
-    printf("\n");
-    printf("======================================================\n");
-    printf("\n");
-    printf("\t     4자리 랜덤 숫자를 맞히는 게임\n");
-    printf("\t   각 자리의 숫자는 중복되지 않습니다.\n");
-    printf("        입력한 숫자 중 동일한 숫자가 있으면");
-    textcolor(9);
-    printf(" BALL\n");
-    textcolor(15);
-    printf("\t      자릿수까지 동일하면");
-    textcolor(12);
-    printf(" STRIKE\n");
-    textcolor(15);
-    printf("    8번의 기회 안에 숫자를 정확히 맞히면 게임은 끝.\n");
-    printf("\n");
-    printf("======================================================\n");
-    printf("\n");
-    printf("\t    계속하려면 Enter를 누르세요..\n");
+	system("mode con:cols=75 lines=20");
+	printf("\n");
+	printf("\n");
+	textcolor(12);
+	printf("\t\t\t\t   204호\n");
+	printf("\t\t\t      숫자 야구 게임  \n");
+	textcolor(15);
+	printf("\n");
+	printf("==========================================================================\n");
+	printf("\n");
+	printf("\t\t       4자리 랜덤 숫자를 맞히는 게임\n");
+	printf("\t\t    각 자리의 숫자는 중복되지 않습니다.\n");
+	printf("\t\t 입력한 숫자 중 동일한 숫자가 있으면");
+	textcolor(9);
+	printf(" BALL\n");
+	textcolor(15);
+	printf("\t\t\t자릿수까지 동일하면");
+	textcolor(12);
+	printf(" STRIKE\n");
+	textcolor(15);
+	printf("\t     8번의 기회 안에 숫자를 정확히 맞히면 게임은 끝.\n");
+	printf("\n");
+	printf("==========================================================================\n");
+	printf("\n");
+	printf("\t\t       계속하려면 Enter를 누르세요..\n");
 
-    char enter = "\n";
-    scanf("%c", &enter);
-    if (enter == '\n') {
-        system("cls");
-        Baseballgame();
-    }
+	char enter = "\n";
+	scanf("%c", &enter);
+	if (enter == '\n') {
+		system("cls");
+		Baseballgame();
+	}
 }
 
 //---------------------------노래가사 맞히기 게임----------------------------------------
