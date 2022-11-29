@@ -29,6 +29,32 @@ void SetConsoleView()
     system("title Google Dinosaurs. By BlockDMask.");
 }
 
+void textcolor(int colorNum) {
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), colorNum);
+}
+
+void intro()
+{
+    printf("\n");
+    printf("\n");
+    textcolor(12);
+    printf("                                               202호\n");
+    printf("                                             공룡 게임\n");
+    textcolor(15);
+    printf("\n");
+    printf("====================================================================================================\n");
+    printf("\n");
+    printf("                                점프하여 장애물을 피하시오. (점프:z)\n");
+    printf("                                        - 최소 15점 이상 -\n");
+    printf("\n");
+    printf("                                            GOOD LUCK..\n\n");
+    printf("====================================================================================================\n");
+    printf("\n\n");
+
+    system("pause");
+    system("cls");
+}
+
 //커서의 위치를 x, y로 이동하는 함수
 void GotoXY(int x, int y)
 {
@@ -128,6 +154,8 @@ bool isCollision(const int treeX, const int dinoY)
 void dinosaur_main()
 {
     SetConsoleView();
+	
+    intro();
 
     while (true)        
     {
