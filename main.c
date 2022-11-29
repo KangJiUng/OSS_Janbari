@@ -21,7 +21,7 @@ int main()
 	printf("3. 공룡게임\n");
 	printf("4. 공룡게임\n");
 	scanf("%d",&count);
-	SingGame_main();
+	sing_main();
 }
 void SetConsoleView()
 {
@@ -374,7 +374,7 @@ void hint(sing_info sing);
 
 sing_info sings[50];
 
-int SingGame_main() {
+int sing_main() {
 	//콘솔 크기 설정
 	system("mode con:cols=55 lines=20");
 	char enter = '\n';
@@ -555,4 +555,83 @@ void end_question()
 	printf("=======================================================\n");
 	textcolor(15);
 	printf("\n");
+}
+
+//--------------------------영단어 맞추기 ---------------------------------------
+struct Problem{
+    char answer[100];
+    char hint[100];
+};
+struct Problem problem[20];
+int main(){
+	//파일에서 answer와 hint 불러오기
+    const int max=1024;
+    char line[max];
+    char *pLine;
+    FILE *in = fopen("/Users/jeong-ujin/Desktop/충북대학교3/충북대학교3/problems.txt", "r");
+    int cnt1=0;
+    int cnt2=0;
+    
+    while(!feof(in)){
+        pLine=fgets(line,max, in);
+        if(pLine==NULL)
+            break;
+        if(cnt2==0){
+            strcpy(problem[cnt1].answer,pLine);
+            cnt2+=1;
+        }
+        else if(cnt2==1){
+            strcpy(problem[cnt1].hint,pLine);
+            cnt2=0; cnt1+=1;
+        }
+    }
+    fclose(in);
+    
+    srand(time(NULL));
+    int cnt=0;
+    int ck[5]={-1,};
+    //random으로 20개의 문제 중 5개의 문제를 불러옴
+    while(1){
+        int check=1;
+        if(cnt==5){
+            break;
+        }
+        int ran_num =rand()%20;
+        for(int i=0; i<cnt; i++){
+            if(ck[i]==ran_num){
+                check=0;
+                break;
+            }
+        }
+        if(check){
+            ck[cnt]=ran_num;
+            cnt++;
+        }
+        //strok(문자열 자르기) 함수 사용
+        char*temp=strtok(problem[ran_num].answer," ");
+        temp=strtok(NULL," ");
+        printf("[%d]%s", cnt ,temp);
+        temp=strtok(NULL,"\n");
+	    //strlen함수(문자열 ) 함수 사용
+        for(int j=0; j<strlen(temp); j++){
+            printf("_");
+            
+        }
+        printf("\n");
+        printf("%s\n",problem[ran_num].hint);
+        //정답 입력 란 및 정답/오답 시 출력되는 
+        while(1){
+            char answer[20];
+            printf("정답 입력: ");
+            scanf("%s", answer);
+            strcmp(answer, temp);
+            if(strcmp(answer, temp)==0){
+                printf("정답이다.\n");
+                break;
+            }
+            else{
+                printf("이러다가 다~ 죽어~ \n");
+            }
+        }
+    }
 }
