@@ -10,19 +10,6 @@
 
 //---------------------------공룡게임----------------------------------------
 //콘솔 창의 크기와 제목을 지정하는 함수
-
-int main()
-{
-	int count;
-	
-	printf("게임을 할 숫자를 입력하세요.");
-	printf("1. 공룡게임\n");
-	printf("2. 공룡게임\n");
-	printf("3. 공룡게임\n");
-	printf("4. 공룡게임\n");
-	scanf("%d",&count);
-	sing_main();
-}
 void SetConsoleView()
 {
     system("mode con:cols=100 lines=25");
