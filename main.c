@@ -53,6 +53,10 @@ int roomselect() {
 	}
 	textcolor(15);
 	printf("\t=========== \t=========== \t=========== \t===========\n\n\n\n\n");
+	
+        printf("\t\t\t   입장할 방을 입력하시오.\n\n");
+        printf("\t\t\t\t     ");
+        scanf("%d", &room);
 
 	if (room == 201) {
 		//201호 게임 함수 호출
