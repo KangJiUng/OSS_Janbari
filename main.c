@@ -119,22 +119,34 @@ void DrawTree(int treeX)
     printf(" $$ ");
 }
 
-//(v2.0) 충돌 했을때 게임오버 그려줌
+//충돌 했을때 화면 보여줌
+void Correct(const int score)
+{
+    system("cls");
+    printf("\n\n\n\n\n\n");
+    textcolor(15);
+    printf("====================================================================================================\n");
+    printf("\n\n\n");
+    printf("                                     축하한다! 어서 탈출하러 가라!");
+    printf("\n\n                                             SCORE : %d", score);
+    printf("\n\n\n");
+    printf("====================================================================================================\n\n\n\n\n");
+    system("pause");
+}
+
 void DrawGameOver(const int score)
 {
     system("cls");
-    int x = 18;
-    int y = 8;
-    GotoXY(x, y);
-    printf("===========================");
-    GotoXY(x, y + 1);
-    printf("======G A M E O V E R======");
-    GotoXY(x, y + 2);
-    printf("===========================");
-    GotoXY(x, y + 5);
-    printf("SCORE : %d", score);
-
-    printf("\n\n\n\n\n\n\n\n\n");
+    printf("\n\n\n\n\n\n");
+    textcolor(15);
+    printf("====================================================================================================\n");
+    printf("\n\n\n");
+    textcolor(12);
+    printf("                                      점프실력을 키워오시오 ㅋ");
+    printf("\n\n                                             SCORE : %d", score);
+    printf("\n\n\n");
+    textcolor(15);
+    printf("====================================================================================================\n\n\n\n\n");
     system("pause");
 }
 
@@ -225,8 +237,14 @@ void dinosaur_main()
             printf("Score : %d ", score);    
         }
 
-        //(v2.0) 게임 오버 메뉴
-        DrawGameOver(score);
+        //게임 오버 메뉴
+        if (score >= 15)
+        {
+            Correct(score);
+            return 0;
+        }
+        else
+            DrawGameOver(score);
     }
 
 }
@@ -314,7 +332,7 @@ void Baseballgame() {
 		
 		if (strike == 4) {
 			system("cls");
-			printf("\n\t\t\t\t   정답\n");
+			printf("\n\n\t\t\t\t   정답\n");
 			FILE* fs1;
 			fs1 = fopen("glove.txt", "r");
 			while (feof(fs1) == 0) {
@@ -326,7 +344,7 @@ void Baseballgame() {
 
 			Sleep(300);
 			system("cls");
-			printf("\n\t\t\t\t   정답\n");
+			printf("\n\n\t\t\t\t   정답\n");
 			FILE* fs2;
 			fs2 = fopen("gloveball.txt", "r");
 			while (feof(fs2) == 0) {
