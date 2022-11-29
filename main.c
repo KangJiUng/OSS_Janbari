@@ -10,6 +10,19 @@
 
 //---------------------------공룡게임----------------------------------------
 //콘솔 창의 크기와 제목을 지정하는 함수
+
+int main()
+{
+	int count;
+	
+	printf("게임을 할 숫자를 입력하세요.");
+	printf("1. 공룡게임\n");
+	printf("2. 공룡게임\n");
+	printf("3. 공룡게임\n");
+	printf("4. 공룡게임\n");
+	scanf("%d",&count);
+	sing_main();
+}
 void SetConsoleView()
 {
     system("mode con:cols=100 lines=25");
@@ -329,4 +342,217 @@ int baseball_main() {
 		system("cls");
 		basenum_main();
 	}
+}
+
+//---------------------------노래가사 맞히기 게임----------------------------------------
+
+#define NUMBER 256
+
+typedef struct sing {
+	char singer[NUMBER];
+	char lyrics[NUMBER];
+	char lyrics1[NUMBER];
+	char answer1[NUMBER];
+	char hint[NUMBER];
+}sing_info;
+
+void GotoXY(int x, int y)
+{
+	COORD Pos = { x,y };
+	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), Pos);
+}
+
+void textcolor(int colorNum) {
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), colorNum);
+}
+void sing_main();
+void correct_question();
+void fail_question();
+void end_question();
+void sing_answer(int count, sing_info sing,int random);
+void hint(sing_info sing);
+
+sing_info sings[50];
+
+int sing_main() {
+	//콘솔 크기 설정
+	system("mode con:cols=55 lines=20");
+	char enter = '\n';
+	char answer[5][50];
+	int hint1[5];
+	int i = 0, j = 0, count = 1, count1 = 0;
+
+	FILE* fp;
+	fp = fopen("노래가사.txt", "r");
+
+	//파일을 읽어와 구조체 배열에 저장
+	if (fp != NULL) {
+		char buffer[NUMBER];
+		sing_info sing;
+		while (!feof(fp)) {
+			fgets(buffer, sizeof(buffer), fp);
+			char* ptr = strtok(buffer, ",");
+			strcpy(sing.singer, ptr);
+			ptr = strtok(NULL, "/");
+			strcpy(sing.lyrics, ptr);
+			ptr = strtok(NULL, ",");
+			strcpy(sing.lyrics1, ptr);
+			ptr = strtok(NULL, ",");
+			strcpy(sing.answer1, ptr);
+			ptr = strtok(NULL, "\n");
+			strcpy(sing.hint, ptr);
+			sings[count1++] = sing;
+		}
+		fclose(fp);
+
+		sing_main(); //메인화면 출력
+		srand(time(NULL));
+
+		//랜덤의 문제 번호를 배열에 저장함
+		for (i = 0; i < 5; i++) {
+			int random = rand() % 21;
+			hint1[i] = random;
+		}
+		scanf("%c", &enter);
+		if (enter == '\n') {
+			while (count <= 5) {
+				system("cls"); //메인화면 지우기
+				sing_answer(count, sing,hint1[j]); //노래가사 맞히기 화면
+				printf("정답을 입력하세요..  ");
+				gets(answer[j]);
+				system("cls");
+
+				//정답일때
+				if (strcmp(answer[j], sings[hint1[j]].answer1) == 0) {
+					correct_question();
+					Sleep(3000);
+					system("cls");
+					j++;
+					count++;
+				}
+				//힌트를 원할 때
+				else if (strcmp(answer[j], "1" )== 0) {
+					sing_answer(count, sing, hint1[j]);
+					hint(sing, hint1[j]);
+					Sleep(3000);
+					system("cls");
+				}
+				//오답일때
+				else {
+					fail_question();
+					Sleep(3000);
+					system("cls");
+				}
+			}
+		}
+	}
+	else {
+		printf("파일 존재 x");
+		return;
+	}
+	end_question();
+	return 0;
+}
+//노래가사 메인
+void sing_main() 
+{
+	printf("\n");
+	printf("\n");
+	textcolor(12);
+	printf("                         203호                         \n");
+	printf("                   노래 가사 맞히기  \n");
+	textcolor(15);
+	printf("\n");
+	printf("=====================================================\n");
+	printf("\n");
+	printf("         빈칸에 알맞은 노래 가사를 넣으세요\n");
+	printf("          총 다섯 문제를 맞추면 통과입니다\n");
+	printf("         힌트는 한 문제당 한번만 제공됩니다 \n");
+	printf("\n");
+	printf("                    GOOD LUCK..\n");
+	printf("=====================================================\n");
+	printf("\n");
+	printf("	   계속하려면 Enter를 누르세요..\n");
+}
+//힌트 제공화면
+void hint(sing_info sing, int random) {
+	GotoXY(0, 16);
+	printf("%s", sings[random].hint);
+}
+//노래가사 맞히기
+void sing_answer(int count,sing_info sing,int random)
+{	
+	printf("\n");
+	printf("\n");
+	textcolor(12);
+	printf("   203호         Score :   %d / %d      \n", count, 5);
+	textcolor(15);
+	printf("\n");
+	printf("=======================================================\n");
+	printf("\n");
+	printf("%s  \n",sings[random].singer);
+	printf("\n");
+	printf("%s\n",sings[random].lyrics);
+	printf("%s\n", sings[random].lyrics1);
+	printf("\n");
+	printf("\n");
+	printf("             힌트를 보려면 1을 누르세요\n");
+	printf("\n");
+	printf("=======================================================\n");
+	printf("\n");
+}
+//정답화면
+void correct_question() 
+{
+	printf("\n");
+	printf("\n");
+	printf("\n");
+	printf("=======================================================\n");
+	printf("\n");
+	printf("\n");
+	printf("\n");
+	printf("              정답이다.....힘을 내라..\n");
+	printf("\n");
+	printf("\n");
+	printf("\n");
+	printf("=======================================================\n");
+	printf("\n");
+}
+//오답화면
+void fail_question()
+{
+	printf("\n");
+	printf("\n");
+	printf("\n");
+	textcolor(12);
+	printf("=======================================================\n");
+	printf("\n");
+	printf("\n");
+	printf("\n");
+	printf("           틀렸다.. 호텔이 무너져 내린다....\n");
+	printf("\n");
+	printf("\n");
+	printf("\n");
+	printf("=======================================================\n");
+	printf("\n");
+}
+
+//문제 다 맞추었을시 ui
+void end_question()
+{
+	printf("\n");
+	printf("\n");
+	printf("\n");
+	textcolor(12);
+	printf("=======================================================\n");
+	printf("\n");
+	printf("\n");
+	printf("\n");
+	printf("            다섯 문제를 모두 맞춘건가..\n");
+	printf("               나가는 길은 저쪽이다..\n");
+	printf("\n");
+	printf("\n");
+	printf("=======================================================\n");
+	textcolor(15);
+	printf("\n");
 }
