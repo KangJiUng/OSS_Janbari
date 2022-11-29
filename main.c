@@ -129,7 +129,10 @@ void Correct(const int score)
     printf("\n\n\n");
     printf("                                     축하한다! 어서 탈출하러 가라!");
     printf("\n\n                                             SCORE : %d", score);
+    textcolor(12);
+    printf("\n\n                                      비밀번호 (두번째 자리) : 7");
     printf("\n\n\n");
+    textcolor(15);
     printf("====================================================================================================\n\n\n\n\n");
     system("pause");
 }
