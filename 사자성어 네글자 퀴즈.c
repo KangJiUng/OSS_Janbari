@@ -4,7 +4,7 @@
 #include <time.h>
 #include <unistd.h> //sleep 기능 구현 위해, windows.h 로 대체
 
-// Mini_game
+// 사자성어 
 struct Problem{
     char answer[100];
     char hint[100];
