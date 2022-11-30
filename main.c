@@ -799,7 +799,7 @@ void engame_ending(){
     printf("                                     이걸 다 맞췄어?...\n\n\n\n\n\n");
     printf("                                     첫번째 비밀번호 : 3\n\n\n\n\n\n");
     printf("====================================================================================================\n");
-    sleep(1);
+    sleep(5);
 }
 
 int Check(int pw1, int pw2, int pw3, int pw4){
