@@ -3,6 +3,7 @@
 #include <time.h>
 #include <Windows.h>
 #include <conio.h>
+#include <unistd.h> //sleep 기능 구현 위해, windows.h 로 대체 < 맥북;
 #define _CRT_SECURE_NO_WARNINGS
 #define DINO_BOTTOM_Y 12
 #define TREE_BOTTOM_Y 20
