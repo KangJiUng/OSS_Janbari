@@ -394,7 +394,7 @@ void Baseballgame() {
 		
 		if (strike == 4) {
 			system("cls");
-			printf("\n\n\t\t\t\t   정답\n");
+			printf("\n\t\t\t\t   정답\n");
 			FILE* fs1;
 			fs1 = fopen("glove.txt", "r");
 			while (feof(fs1) == 0) {
@@ -414,6 +414,18 @@ void Baseballgame() {
 				fgets(str, 20, fs2);
 				printf("%s", str);
 			}
+			Sleep(900);
+
+			system("cls");
+
+
+			printf("\n\n\n\n"); 
+			printf("===========================================================================");
+			printf("\n\n\n");
+			printf("\t\t      비밀번호 (세 번째 자리) : 6");
+			printf("\n\n\t\t         시간은 흐르고 있다...");
+			printf("\n\n\n");
+			printf("===========================================================================\n\n\n\n\n");
 			break;
 		}
 	}
