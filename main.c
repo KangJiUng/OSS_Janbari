@@ -262,8 +262,8 @@ void engame_ending() {
 int Check(int pw1, int pw2, int pw3, int pw4) {
 	int ck1 = pw1 == 3 ? 0 : 1;
 	int ck2 = pw2 == 7 ? 0 : 1;
-	int ck3 = pw3 == 6 ? 0 : 1;
-	int ck4 = pw4 == 0 ? 0 : 1;
+	int ck3 = pw3 == 0 ? 0 : 1;
+	int ck4 = pw4 == 6 ? 0 : 1;
 
 	if (ck1 + ck2 + ck3 + ck4 > 0) { //정답 아닌 경우
 		return 0;
