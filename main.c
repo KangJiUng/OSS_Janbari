@@ -5,59 +5,20 @@
 #include <Windows.h>
 #include <conio.h>
 #include <stdbool.h>
-#include<mmsystem.h>
-//#include <unistd.h> //sleep 기능 구현 위해, windows.h 대체 < 맥북;
+#include <mmsystem.h>
 #pragma comment(lib,"winmm.lib")
+//#include <unistd.h> //sleep 기능 구현 위해, windows.h 대체 < 맥북;
 #define DINO_BOTTOM_Y 12
 #define TREE_BOTTOM_Y 20
 #define TREE_BOTTOM_X 45
-#define NUMBER 256
 
-typedef struct sing {
-	char singer[NUMBER];
-	char lyrics[NUMBER];
-	char lyrics1[NUMBER];
-	char answer1[NUMBER];
-	char hint[NUMBER];
-}sing_info;
+void roomselect();
 
-void Gotoxy(int x, int y)
-{
-	COORD Pos = { x,y };
-	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), Pos);
-}
-
-//커서의 위치를 x, y로 이동하는 함수
-void GotoXY(int x, int y)
-{
-	COORD Pos;
-	Pos.X = 2 * x;
-	Pos.Y = y;
-	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), Pos);
-}
-
+int c1 = 0, c2 = 0, c3 = 0, c4 = 0;
 
 void textcolor(int colorNum) {
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), colorNum);
 }
-
-void SetConsoleView()
-{
-	system("mode con:cols=100 lines=25");
-	system("title Google Dinosaurs. By BlockDMask.");
-}
-
-
-void sing_main();
-void correct_question();
-void fail_question();
-void end_question();
-void sing_answer(int count, sing_info sing, int random);
-void hint(sing_info sing);
-
-sing_info sings[50];
-
-
 //--------------------------사자성어 --------------------------------------
 
 // 사자성어 네글자 퀴즈
@@ -114,28 +75,6 @@ void save_problem() {
 	fclose(in);
 }
 
-void intro_engame() {
-	system("cls");
-
-	printf("\n");
-	printf("\n");
-	printf("\t\t\t\t   201호\x1b[0m\n");
-	printf("\t\t           사자성어 네글자 퀴즈\n");
-	printf("\n");
-	printf("===========================================================================\n");
-	printf("\n");
-	printf("                      힌트를 보고 사자성어를 맞히시오.\n");
-	printf("                                 - 5문제 -\n");
-	printf("\n");
-	printf("                                GOOD LUCK..\n\n");
-	printf("===========================================================================\n");
-	printf("\n\n");
-	system("pause");
-	char b;
-	printf("PRESS ENTER TO START...");
-	scanf("%c", &b);
-}
-
 void Right() {
 	system("cls");
 	printf("\n\n\n===========================================================================\n\n\n\n\n");
@@ -186,14 +125,43 @@ void eng_game() {
 	}
 }
 
+
+void intro_engame() {
+	system("cls");
+
+	printf("\n");
+	printf("\n");
+	textcolor(12);
+	printf("\t\t\t\t   201호\n");
+	printf("\t\t           사자성어 네글자 퀴즈\n");
+	textcolor(15);
+	printf("\n");
+	printf("===========================================================================\n");
+	printf("\n");
+	printf("                      힌트를 보고 사자성어를 맞히시오.\n");
+	printf("                                 - 5문제 -\n");
+	printf("\n");
+	printf("                                GOOD LUCK..\n\n");
+	printf("===========================================================================\n");
+	printf("\n\n");
+
+	system("pause");
+	eng_game();
+}
+
+
 void engame_ending() {
 	system("cls");
 	printf("\n\n\n===========================================================================\n\n\n\n");
 	printf("                             이걸 다 맞혔어?...\n");
+	textcolor(12);
 	printf("                        비밀번호(첫 번째 자리) : 3\n\n\n\n");
+	textcolor(15);
 	printf("===========================================================================\n\n\n");
 	Sleep(5000);
+	roomselect();
 }
+
 
 int Check(int pw1, int pw2, int pw3, int pw4) {
 	int ck1 = pw1 == 3 ? 0 : 1;
@@ -213,8 +181,8 @@ void en_main() {
 	save_problem(); //문제 & 힌트 저장
 	set_idx(); //랜덤 index 5개 추출
 	intro_engame(); //시작 화면 출력
-	eng_game(); //게임 실행
-	engame_ending(); //엔딩 화면
+	 //게임 실행 
+	engame_ending();//엔딩 화면
 }
 
 void total_ending() {
@@ -240,11 +208,7 @@ void ck() {
 
 //---------------------------공룡게임----------------------------------------
 
-void SetConsoleView()
-{
-    system("mode con:cols=100 lines=25");
-    system("title Google Dinosaurs. By BlockDMask.");
-}
+
 void intro()
 {
 	printf("\n");
@@ -266,12 +230,22 @@ void intro()
 	system("pause");
 	system("cls");
 }
+//커서의 위치를 x, y로 이동하는 함수
 void GotoXY(int x, int y)
 {
-    COORD Pos;
-    Pos.X = 2 * x;
-    Pos.Y = y;
-    SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), Pos);
+	COORD Pos;
+	Pos.X = 2 * x;
+	Pos.Y = y;
+	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), Pos);
+}
+
+
+
+
+void SetConsoleView()
+{
+	system("mode con:cols=100 lines=25");
+	system("title Google Dinosaurs. By BlockDMask.");
 }
 
 //키보드의 입력을 받고, 입력된 키의 값을 반환하는 함수
@@ -344,7 +318,8 @@ void Correct(const int score)
 	printf("\n\n\n");
 	textcolor(15);
 	printf("====================================================================================================\n\n\n\n\n");
-	system("pause");
+	Sleep(1000);
+	roomselect();
 }
 
 void DrawGameOver(const int score)
@@ -360,7 +335,8 @@ void DrawGameOver(const int score)
 	printf("\n\n\n");
 	textcolor(15);
 	printf("====================================================================================================\n\n\n\n\n");
-	system("pause");
+	Sleep(1000);
+	void dinosaur_main();
 }
 
 //(v2.0) 충돌했으면 true, 아니면 false
@@ -463,131 +439,34 @@ void dinosaur_main()
 }
 
 //---------------------------노래가사 맞히기 게임----------------------------------------
+#define NUMBER 256
 
-//노래가사 메인
-void sing_main()
+typedef struct sing {
+	char singer[NUMBER];
+	char lyrics[NUMBER];
+	char lyrics1[NUMBER];
+	char answer1[NUMBER];
+	char hint[NUMBER];
+}sing_info;
+
+void GotoXY1(int x, int y)
 {
-	printf("\n");
-	printf("\n");
-	textcolor(12);
-	printf("\t\t\t\t   203호\n");
-	printf("\t\t         ♬ 노래가사 맞히기 게임 ♬ \n");
-	textcolor(15);
-	printf("\n");
-	printf("===========================================================================\n");
-	textcolor(15);
-	printf("\n");
-	printf("\n");
-	printf("         \t  ♪ 빈칸에 알맞은 노래 가사를 넣으세요\n");
-	printf("         \t  ♪ 총 5 문제를 맞추면 통과입니다\n");
-	printf("         \t  ♪ 힌트는 한 문제당 한번만 제공됩니다 \n");
-	printf("\n");
-	printf("\n");
-	printf(" \t\t\t     ♬ GOOD LUCK..\n");
-	printf("===========================================================================\n");
-	printf("\n");
-	printf("\t\t       계속하려면 Enter를 누르세요..\n");
-}
-//힌트 제공화면
-void hint(sing_info sing, int random) {
-	GotoXY(0, 16);
-	printf("%s", sings[random].hint);
-}
-//노래가사 맞히기
-void sing_answer(int count, sing_info sing, int random)
-{
-	printf("\n");
-	printf("\n");
-	textcolor(12);
-	printf("   203호\t\t    Score :   %d / %d      \n", count, 5);
-	textcolor(15);
-	printf("\n");
-	printf("===========================================================================\n");
-	printf("\n");
-	printf("\t\t   ♬ %s ♬\n", sings[random].singer);
-	printf("\n");
-	printf("\t\t   %s\n", sings[random].lyrics);
-	printf("\t\t   %s\n", sings[random].lyrics1);
-	printf("\n");
-	printf("\n");
-	printf("\t\t   힌트를 간절히 원한다면 1을 누르세요\n");
-	printf("\n");
-	printf("===========================================================================\n");
-	printf("\n");
-}
-//정답화면
-void correct_question()
-{
-	printf("\n");
-	printf("\n");
-	printf("\n");
-	printf("===========================================================================\n");
-	printf("\n");
-	printf("\n");
-	printf("\n");
-	printf("                         정답이다.....힘을 내라..\n");
-	printf("\n");
-	printf("\n");
-	printf("\n");
-	printf("===========================================================================\n");
-	printf("\n");
-}
-//오답화면
-void fail_question()
-{
-	printf("\n");
-	printf("\n");
-	printf("\n");
-	textcolor(12);
-	printf("===========================================================================\n");
-	printf("\n");
-	printf("\n");
-	printf("\n");
-	printf("                      틀렸다.. 호텔이 무너져 내린다....\n");
-	printf("\n");
-	printf("\n");
-	printf("\n");
-	printf("===========================================================================\n");
-	printf("\n");
+	COORD Pos = { x,y };
+	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), Pos);
 }
 
-//문제 다 맞추었을시 ui
-void end_question()
-{
-	printf("\n");
-	printf("\n");
-	printf("\n");
-	textcolor(12);
-	printf("===========================================================================\n");
-	printf("\n");
-	printf("\n");
-	printf("\n");
-	printf("                        다섯 문제를 모두 맞춘건가..\n");
-	printf("                           나가는 길은 저쪽이다..\n");
-	printf("\n");
-	printf("\n");
-	printf("===========================================================================\n");
-	textcolor(15);
-	printf("\n");
-}
-void ending()
-{
-	printf("\n");
-	printf("\n");
-	printf("\n");
-	textcolor(12);
-	printf("===========================================================================\n");
-	printf("\n");
-	printf("\n");
-	printf("\n");
-	printf("                        어이!! 비밀번호 가져가라...\n");
-	printf("                            (세 번째 자리) 6..\n");
-	printf("\n");
-	printf("\n");
-	printf("===========================================================================\n");
-	textcolor(15);
-	printf("\n");
-}
+void print_main();
+void sing_main();
+void correct_question();
+void fail_question();
+void end_question();
+void sing_answer(int count, sing_info sing, int random);
+void hint(sing_info sing);
+void ending();
+
+sing_info sings[50];
+
+
 
 void sings_main() {
 	//콘솔 크기 설정
@@ -598,7 +477,7 @@ void sings_main() {
 	int i = 0, j = 0, count = 1, count1 = 0;
 
 	FILE* fp;
-	fp = fopen("노래가사.txt", "r");
+	fp = fopen("sing.txt", "r");
 
 	//파일을 읽어와 구조체 배열에 저장
 	if (fp != NULL) {
@@ -628,6 +507,7 @@ void sings_main() {
 			int random = rand() % 21;
 			hint1[i] = random;
 		}
+		system("pause");
 		scanf("%c", &enter);
 		if (enter == '\n') {
 			while (count <= 5) {
@@ -669,7 +549,134 @@ void sings_main() {
 	Sleep(2000);
 	system("cls");
 	ending();
-	return 0;
+}
+//노래가사 메인
+void sing_main()
+{
+	printf("\n");
+	printf("\n");
+	textcolor(12);
+	printf("\t\t\t\t   203호\n");
+	printf("\t\t         ♬ 노래가사 맞히기 게임 ♬ \n");
+	textcolor(15);
+	printf("\n");
+	printf("===========================================================================\n");
+	textcolor(15);
+	printf("\n");
+	printf("\n");
+	printf("         \t  ♪ 빈칸에 알맞은 노래 가사를 넣으세요\n");
+	printf("         \t  ♪ 총 5 문제를 맞추면 통과입니다\n");
+	printf("         \t  ♪ 힌트는 한 문제당 한번만 제공됩니다 \n");
+	printf("\n");
+	printf("\n");
+	printf(" \t\t\t     ♬ GOOD LUCK..\n");
+	printf("===========================================================================\n");
+	printf("\n");
+	system("pause");
+}
+//힌트 제공화면
+void hint(sing_info sing, int random) {
+	GotoXY1(0, 16);
+	printf("%s", sings[random].hint);
+}
+//노래가사 맞히기
+void sing_answer(int count, sing_info sing, int random)
+{
+	printf("\n");
+	printf("\n");
+	textcolor(12);
+	printf("   203호\t\t    Score :   %d / %d      \n", count, 5);
+	textcolor(15);
+	printf("\n");
+	printf("===========================================================================\n");
+	printf("\n");
+	printf("\t\t   ♬ %s ♬\n", sings[random].singer);
+	printf("\n");
+	printf("\t\t   %s\n", sings[random].lyrics);
+	printf("\t\t   %s\n", sings[random].lyrics1);
+	printf("\n");
+	printf("\n");
+	printf("\t\t   힌트를 간절히 원한다면 1을 누르세요\n");
+	printf("\n");
+	printf("===========================================================================\n");
+	printf("\n");
+}
+//정답화면
+void correct_question()
+{
+	printf("\n");
+	printf("\n");
+	printf("\n");
+	printf("===========================================================================\n");
+	printf("\n");
+	printf("\n");
+	printf("\n");
+	printf("                         정답이다.....힘을 내라..\n");
+	printf("\n");
+	printf("\n");
+	printf("\n");
+	printf("===========================================================================\n");
+	printf("\n");
+
+}
+//오답화면
+void fail_question()
+{
+	printf("\n");
+	printf("\n");
+	printf("\n");
+	textcolor(12);
+	printf("===========================================================================\n");
+	printf("\n");
+	printf("\n");
+	printf("\n");
+	printf("                      틀렸다.. 호텔이 무너져 내린다....\n");
+	printf("\n");
+	printf("\n");
+	printf("\n");
+	printf("===========================================================================\n");
+	printf("\n");
+}
+
+//문제 다 맞추었을시 ui
+void end_question()
+{
+	printf("\n");
+	printf("\n");
+	printf("\n");
+	printf("===========================================================================\n");
+	printf("\n");
+	printf("\n");
+	printf("\n");
+	printf("                        다섯 문제를 모두 맞춘건가..\n");
+	printf("                           나가는 길은 저쪽이다..\n");
+	printf("\n");
+	printf("\n");
+	printf("===========================================================================\n");
+	textcolor(15);
+	printf("\n");
+}
+void ending()
+{
+	printf("\n");
+	printf("\n");
+	printf("\n");
+	printf("===========================================================================\n");
+	printf("\n");
+	printf("\n");
+	printf("\n");
+	printf("                        어이!! 비밀번호 가져가라...\n");
+	printf("\n");
+	textcolor(12);
+	printf("                             (세번째 자리) 6..\n");
+	textcolor(15);
+	printf("\n");
+	printf("\n");
+	printf("===========================================================================\n");
+	textcolor(15);
+	printf("\n");
+	Sleep(1000);
+	roomselect();
 }
 
 
@@ -784,12 +791,16 @@ void Baseballgame() {
 
 			printf("\n\n\n\n");
 			printf("===========================================================================");
-			printf("\n\n\n");
+			printf("\n\n\n"); 
+			
+			textcolor(12);
 			printf("\t\t      비밀번호(네 번째 자리) : 0");
+			textcolor(15);
 			printf("\n\n\t\t         시간은 흐르고 있다...");
 			printf("\n\n\n");
 			printf("===========================================================================\n\n\n\n\n");
-			word_main();
+			Sleep(1000);
+			roomselect();
 			break;
 		}
 	}
@@ -820,7 +831,6 @@ void baseball_main() {
 	printf("\n");
 	printf("==========================================================================\n");
 	printf("\n");
-	printf("\t\t       계속하려면 Enter를 누르세요..\n");
 
 	system("pause");
 	char enter = "\n";
@@ -851,15 +861,11 @@ void print_main() {
 	printf("                          = -- -- |   | -- -- =\n");
 	printf("                        =========================\n");
 	textcolor(15);
-	printf("\n");
 	printf("===========================================================================\n");
 	printf("\n");
-	printf("                   게임을 시작하려면 아무키나 누르세요.. \n");
-	printf("\n");
-	printf("===========================================================================\n");
-	textcolor(15);
-	
 	system("pause");
+	printf("===========================================================================\n\n\n\n");
+	textcolor(15);
 }
 void print_talk()
 {
@@ -897,8 +903,9 @@ void print_talk()
 }
 //-------------------------------방선택화면----------------------------------------
 void roomselect() {
+
+	system("cls");
 	int room = 0;
-	int c1 = 0, c2 = 0, c3 = 0, c4 = 0;
 	system("mode con:cols=75 lines=20");
 	printf("\n");
 	printf("\n");
@@ -946,35 +953,38 @@ void roomselect() {
 	scanf("%d", &room);
 
 	if (room == 201) {
-		en_main();
 		c1 += 1;
+		en_main();
 	}
 	else if (room == 202) {
-		dinosaur_main();
 		c2 += 1;
-	}
+		dinosaur_main();
+	} 
 	else if (room == 203) {
-		sing_main();
 		c3 += 1;
+		sings_main();
 	}
 	else if (room == 204) {
-		baseball_main();
 		c4 += 1;
+		baseball_main();
 	}
 }
 
 
 int main()
 {
-	PlaySound(TEXT("bgm.wav"), NULL, SND_ASYNC | SND_LOOP);
-	
-	system("mode con:cols=75 lines=20");
 
+	system("mode con:cols=75 lines=20");
+	
 	print_main();
 	Sleep(2000);
 	system("cls");
+
+	PlaySound(TEXT("bgm.wav"), NULL, SND_ASYNC | SND_LOOP); 
 	print_talk();
 	Sleep(2000);
-	system("cls");
+	
+	
 	roomselect();
+	
 }
