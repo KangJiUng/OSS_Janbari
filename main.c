@@ -962,6 +962,8 @@ void roomselect() {
 
 int main()
 {
+	PlaySound(TEXT("bgm.wav"), NULL, SND_ASYNC | SND_LOOP);
+	
 	system("mode con:cols=75 lines=20");
 
 	print_main();
