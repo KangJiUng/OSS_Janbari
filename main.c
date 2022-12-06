@@ -158,7 +158,7 @@ void engame_ending() {
 	printf("                        비밀번호(첫 번째 자리) : 3\n\n\n\n");
 	textcolor(15);
 	printf("===========================================================================\n\n\n");
-	Sleep(5000);
+	Sleep(1000);
 	roomselect();
 }
 
@@ -185,6 +185,9 @@ void en_main() {
 	engame_ending();//엔딩 화면
 }
 
+
+//--------------------비밀번호 입력화면--------------------------
+
 void total_ending() {
 	system("cls");
 	printf("====================================================================================================\n\n\n\n\n\n");
@@ -192,14 +195,18 @@ void total_ending() {
 	printf("====================================================================================================\n");
 	Sleep(5000);
 }
-int p1; int p2; int p3; int p4;
 
 void ck() {
 	while (1) {
-		system("clear");
+
+		int p1=3; int p2=7; int p3=6; int p4;
+		system("cls");	
+		printf("\n\n\n\n\n\n");
 		printf("비밀번호를 입력하시오: ");
 		scanf("%d %d %d %d", &p1, &p2, &p3, &p4);
-		if (Check(p1, p2, p3, p4)) break;
+		if (Check(p1, p2, p3, p4)) {
+			total_ending();
+		}
 	}
 }
 
@@ -607,6 +614,7 @@ void correct_question()
 	printf("\n");
 	printf("\n");
 	printf("\n");
+	printf("\n");
 	printf("===========================================================================\n");
 	printf("\n");
 	printf("\n");
@@ -622,6 +630,7 @@ void correct_question()
 //오답화면
 void fail_question()
 {
+	printf("\n");
 	printf("\n");
 	printf("\n");
 	printf("\n");
@@ -644,6 +653,7 @@ void end_question()
 	printf("\n");
 	printf("\n");
 	printf("\n");
+	printf("\n");
 	printf("===========================================================================\n");
 	printf("\n");
 	printf("\n");
@@ -661,12 +671,12 @@ void ending()
 	printf("\n");
 	printf("\n");
 	printf("\n");
+	printf("\n");
 	printf("===========================================================================\n");
 	printf("\n");
 	printf("\n");
 	printf("\n");
 	printf("                        어이!! 비밀번호 가져가라...\n");
-	printf("\n");
 	textcolor(12);
 	printf("                             (세번째 자리) 6..\n");
 	textcolor(15);
@@ -864,7 +874,6 @@ void print_main() {
 	printf("===========================================================================\n");
 	printf("\n");
 	system("pause");
-	printf("===========================================================================\n\n\n\n");
 	textcolor(15);
 }
 void print_talk()
@@ -897,7 +906,7 @@ void print_talk()
 		printf("\n");
 		printf("===========================================================================\n");
 		i++;
-		Sleep(2000);
+		Sleep(2800);
 		system("cls");
 	}
 }
@@ -948,25 +957,31 @@ void roomselect() {
 	textcolor(15);
 	printf("\t=========== \t=========== \t=========== \t===========\n\n\n\n\n");
 
-	printf("\t\t\t   입장할 방을 입력하시오.\n\n");
-	printf("\t\t\t\t     ");
-	scanf("%d", &room);
+	if (c1 == 1 && c2 == 1 && c3 == 1 && c4 == 1) {
+		ck();
+	}
 
-	if (room == 201) {
-		c1 += 1;
-		en_main();
-	}
-	else if (room == 202) {
-		c2 += 1;
-		dinosaur_main();
-	} 
-	else if (room == 203) {
-		c3 += 1;
-		sings_main();
-	}
-	else if (room == 204) {
-		c4 += 1;
-		baseball_main();
+	else {
+		printf("\t\t\t   입장할 방을 입력하시오.\n\n");
+		printf("\t\t\t\t     ");
+		scanf("%d", &room);
+
+		if (room == 201) {
+			c1 += 1;
+			en_main();
+		}
+		else if (room == 202) {
+			c2 += 1;
+			dinosaur_main();
+		}
+		else if (room == 203) {
+			c3 += 1;
+			sings_main();
+		}
+		else if (room == 204) {
+			c4 += 1;
+			baseball_main();
+		}
 	}
 }
 
@@ -977,14 +992,10 @@ int main()
 	system("mode con:cols=75 lines=20");
 	
 	print_main();
-	Sleep(2000);
 	system("cls");
 
 	PlaySound(TEXT("bgm.wav"), NULL, SND_ASYNC | SND_LOOP); 
-	print_talk();
-	Sleep(2000);
-	
-	
+	print_talk();	
 	roomselect();
 	
 }
