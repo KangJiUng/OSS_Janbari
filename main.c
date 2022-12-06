@@ -5,7 +5,9 @@
 #include <Windows.h>
 #include <conio.h>
 #include <stdbool.h>
+#include<mmsystem.h>
 //#include <unistd.h> //sleep 기능 구현 위해, windows.h 대체 < 맥북;
+#pragma comment(lib,"winmm.lib")
 #define DINO_BOTTOM_Y 12
 #define TREE_BOTTOM_Y 20
 #define TREE_BOTTOM_X 45
@@ -237,7 +239,11 @@ void ck() {
 
 //---------------------------공룡게임----------------------------------------
 
-
+void SetConsoleView()
+{
+    system("mode con:cols=100 lines=25");
+    system("title Google Dinosaurs. By BlockDMask.");
+}
 void intro()
 {
 	printf("\n");
@@ -259,7 +265,13 @@ void intro()
 	system("pause");
 	system("cls");
 }
-
+void GotoXY(int x, int y)
+{
+    COORD Pos;
+    Pos.X = 2 * x;
+    Pos.Y = y;
+    SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), Pos);
+}
 
 //키보드의 입력을 받고, 입력된 키의 값을 반환하는 함수
 int GetKeyDown()
