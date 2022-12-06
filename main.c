@@ -119,17 +119,18 @@ void intro_engame() {
 
 	printf("\n");
 	printf("\n");
-	printf("\x1b[31m                                               201호\x1b[0m\n");
-	printf("                                         사자성어 네글자 퀴즈\n");
+	printf("\t\t\t\t   201호\x1b[0m\n");
+	printf("\t\t           사자성어 네글자 퀴즈\n");
 	printf("\n");
-	printf("====================================================================================================\n");
+	printf("===========================================================================\n");
 	printf("\n");
-	printf("                                  힌트를 보고 사자성어를 맞추시오.\n");
-	printf("                                             - 5문제 -\n");
+	printf("                      힌트를 보고 사자성어를 맞히시오.\n");
+	printf("                                 - 5문제 -\n");
 	printf("\n");
-	printf("                                            GOOD LUCK..\n\n");
-	printf("====================================================================================================\n");
+	printf("                                GOOD LUCK..\n\n");
+	printf("===========================================================================\n");
 	printf("\n\n");
+	system("pause");
 	char b;
 	printf("PRESS ENTER TO START...");
 	scanf("%c", &b);
@@ -821,6 +822,7 @@ void baseball_main() {
 	printf("\n");
 	printf("\t\t       계속하려면 Enter를 누르세요..\n");
 
+	system("pause");
 	char enter = "\n";
 	scanf("%c", &enter);
 	if (enter == '\n') {
@@ -856,6 +858,8 @@ void print_main() {
 	printf("\n");
 	printf("===========================================================================\n");
 	textcolor(15);
+	
+	system("pause");
 }
 void print_talk()
 {
