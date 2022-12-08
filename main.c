@@ -163,19 +163,6 @@ void engame_ending() {
 }
 
 
-int Check(int pw1, int pw2, int pw3, int pw4) {
-	int ck1 = pw1 == 3 ? 0 : 1;
-	int ck2 = pw2 == 7 ? 0 : 1;
-	int ck3 = pw3 == 0 ? 0 : 1;
-	int ck4 = pw4 == 6 ? 0 : 1;
-
-	if (ck1 + ck2 + ck3 + ck4 > 0) { //정답 아닌 경우
-		return 0;
-	}
-	else { //정답인 경우
-		return 1;
-	}
-}
 
 void en_main() {
 	save_problem(); //문제 & 힌트 저장
@@ -198,13 +185,12 @@ void total_ending() {
 
 void ck() {
 	while (1) {
-
-		int p1=3; int p2=7; int p3=6; int p4;
+		int p1 = 3760;
 		system("cls");	
 		printf("\n\n\n\n\n\n");
 		printf("비밀번호를 입력하시오: ");
-		scanf("%d %d %d %d", &p1, &p2, &p3, &p4);
-		if (Check(p1, p2, p3, p4)) {
+		scanf("%d", &p1);
+		if (p1==3760) {
 			total_ending();
 		}
 	}
