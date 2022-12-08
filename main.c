@@ -179,7 +179,7 @@ void Password(){
     system("cls");
     printf("\n");
     printf("\n");
-    printf("\x1b[31m               Janbari Hotel Escape Game\x1b[0m\n");
+    printf("\x1b[31m                                   Janbari Hotel Escape Game\x1b[0m\n");
     printf("===========================================================================\n");
     printf("\n");
     printf("                          비밀번호 네자리를 입력하시오.\n");
@@ -193,13 +193,13 @@ void Ending()
 	int i = 0;
 
 	char end[4][500] = { {"덜컥... 마침내 문이 열렸다... \n"} ,
-		{"        (그때 뒤에서 들려오는 발걸음 소리...)\n"},
-		{"            터벅... 터벅... 콰직!\n"},
-		{"                  The End\n"}
+		{"(그때 뒤에서 들려오는 발걸음 소리...)\n"},
+		{"터벅... 터벅... 콰직!\n"},
+		{"\x1b[31mThe End\x1b[0m\n"}
 	};
 	while (i <= 3) {
 		printf("\n");
-		printf("\x1b[31m              Janbari Hotel Escape Game\x1b[0m\n");
+		printf("\x1b[31m                                  Janbari Hotel Escape Game\x1b[0m\n");
 		printf("\n");
 		printf("\n");
 		printf("\n");
@@ -241,8 +241,8 @@ void ck() {
 		scanf("%d", &p1);
 		if (p1==3760) {
 			Ending();
+			exit(0);
 		}
-		break;
 		/*else{
 			Fail();
 		}*/
