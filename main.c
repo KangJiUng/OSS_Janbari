@@ -691,11 +691,7 @@ void ending()
 
 
 //---------------------------숫자야구게임----------------------------------------
-void word_main() {
-	en_main();
-	ck();
-	total_ending();
-};
+
 
 int* CreateRandomNums() {
 	static int ranNums[4];
@@ -768,8 +764,17 @@ void Baseballgame() {
 		cnt++;
 
 		if (cnt == 9) {
-			printf("실패");
-			break;
+			system("cls");
+			printf("\n\n\n\n");
+			printf("===========================================================================\n");
+			printf("\n\n\n");
+			printf("                       좀 더 추리력을 발휘해야한다...\n");
+			printf("\n\n\n");
+			printf("===========================================================================\n");
+			printf("\n");
+			Sleep(1000);
+			system("cls");
+			Baseballgame();
 		}
 
 		if (strike == 4) {
@@ -811,7 +816,6 @@ void Baseballgame() {
 			printf("===========================================================================\n\n\n\n\n");
 			Sleep(1000);
 			roomselect();
-			break;
 		}
 	}
 }
@@ -838,17 +842,15 @@ void baseball_main() {
 	printf(" STRIKE\n");
 	textcolor(15);
 	printf("\t     8번의 기회 안에 숫자를 정확히 맞히면 게임은 끝.\n");
+	printf("\t         실패하면 숫자는 랜덤으로 재생성됩니다.\n");
 	printf("\n");
 	printf("==========================================================================\n");
 	printf("\n");
 
 	system("pause");
-	char enter = "\n";
-	scanf("%c", &enter);
-	if (enter == '\n') {
-		system("cls");
-		Baseballgame();
-	}
+	system("cls");
+	Baseballgame();
+	
 	
 }
 
