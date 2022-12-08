@@ -13,6 +13,7 @@
 #define TREE_BOTTOM_X 45
 
 void roomselect();
+void print_main();
 
 int c1 = 0, c2 = 0, c3 = 0, c4 = 0;
 
@@ -169,39 +170,50 @@ void en_main() {
 	save_problem(); //문제 & 힌트 저장
 	set_idx(); //랜덤 index 5개 추출
 	intro_engame(); //시작 화면 출력
-	 //게임 실행 
+	//게임 실행 
 	engame_ending();//엔딩 화면
 }
 
 
 //--------------------비밀번호 입력화면--------------------------
-void Password(){
-    system("cls");
-    printf("\n");
-    printf("\n");
-    printf("\x1b[31m                                   Janbari Hotel Escape Game\x1b[0m\n");
-    printf("===========================================================================\n");
-    printf("\n");
-    printf("                          비밀번호 네자리를 입력하시오.\n");
-    printf("                             [            ]\n");
-    printf("\n");
-    printf("===========================================================================\n");
-    printf("\n\n");
+void Password() {
+	system("cls");
+	printf("\n");
+	printf("\n");
+	textcolor(12);
+	printf("\t\t         Janbari Hotel Escape Game\n\n\n");
+	textcolor(15);
+	printf("\t\t       -----------------------------\n");
+	printf("\t\t       |             |             |\n");
+	printf("\t\t       |             |             |\n");
+	printf("\t\t       |             |             |\n");
+	printf("\t\t       |          ● |  ●         |\n");
+	printf("\t\t       |             |             |\n");
+	printf("\t\t       |             |             |\n");
+	printf("\t\t       |             |             |\n");
+	printf("\t\t       -----------------------------\n\n");
+	printf("                       비밀번호 네 자리를 입력하시오.\n");
+	printf("\t\t\t\t  : ");
 }
+
 void Ending()
 {
 	int i = 0;
+	system("cls");
+	char end[6][500] = { {" 덜컥... 마침내 문이 열렸다... \n"} ,
+		{" (그때 뒤에서 들려오는 발걸음 소리...)\n"},
+		{" 터벅\n"},
+		{" 터벅...\n"},
+		{"\x1b[31m 콰직!\x1b[0m\n"},
+		{"\t\t\t\t  \x1b[31mThe End\x1b[0m\n"}
 
-	char end[4][500] = { {"덜컥... 마침내 문이 열렸다... \n"} ,
-		{"(그때 뒤에서 들려오는 발걸음 소리...)\n"},
-		{"터벅... 터벅... 콰직!\n"},
-		{"\x1b[31mThe End\x1b[0m\n"}
 	};
-	while (i <= 3) {
+
+	while (i <= 5) {
 		printf("\n");
-		printf("\x1b[31m                                  Janbari Hotel Escape Game\x1b[0m\n");
-		printf("\n");
-		printf("\n");
+		textcolor(12);
+		printf("\t\t         Janbari Hotel Escape Game\n\n\n");
+		textcolor(15);
 		printf("\n");
 		printf("\n");
 		printf("\n");
@@ -214,38 +226,46 @@ void Ending()
 		printf("\n");
 		printf("%s", end[i]);
 		printf("\n");
-		printf("===========================================================================\n");
+		printf("===========================================================================\n\n\n");
 		i++;
-		sleep(2800);
-        system("cls");
+		Sleep(2000);
+
+		system("cls");
 	}
+
+	Sleep(1000);
+	system("cls");
 }
-/*void Fail(){
-    system("cls");
-    printf("\n");
-    printf("\n");
-    printf("===========================================================================\n");
-    printf("\n");
-    printf("\x1b[31m                    You Die\x1b[0m\n");
-    printf("\n");
-    printf("===========================================================================\n");
-    printf("\n\n");
+
+/*void Fail() {
+	system("cls");
+	printf("\n");
+	printf("\n");
+	printf("===========================================================================\n");
+	printf("\n");
+	printf("\x1b[31m                    You Die\x1b[0m\n");
+	printf("\n");
+	printf("===========================================================================\n");
+	printf("\n\n");
+	Sleep(1000);
+	print_main();
 }*/
 
 void ck() {
+
+	system("mode con:cols=75 lines=20");
 	while (1) {
 		int p1 = 3760;
-		system("cls");	
+		int cnt = 0;
+		system("cls");
 		printf("\n\n\n\n\n\n");
 		Password();
 		scanf("%d", &p1);
-		if (p1==3760) {
-			Ending();
-			exit(0);
-		}
-		/*else{
-			Fail();
-		}*/
+
+		if (p1 == 3760) {
+				Ending();
+				print_main();
+			}
 	}
 }
 
@@ -553,7 +573,6 @@ void sings_main() {
 			int random = rand() % 21;
 			hint1[i] = random;
 		}
-		system("pause");
 		scanf("%c", &enter);
 		if (enter == '\n') {
 			while (count <= 5) {
@@ -673,8 +692,8 @@ void fail_question()
 	printf("\n");
 	printf("\n");
 	printf("\n");
-	textcolor(12);
 	printf("===========================================================================\n");
+	textcolor(12);
 	printf("\n");
 	printf("\n");
 	printf("\n");
@@ -682,6 +701,7 @@ void fail_question()
 	printf("\n");
 	printf("\n");
 	printf("\n");
+	textcolor(15);
 	printf("===========================================================================\n");
 	printf("\n");
 }
@@ -699,6 +719,7 @@ void end_question()
 	printf("\n");
 	printf("                        다섯 문제를 모두 맞춘건가..\n");
 	printf("                           나가는 길은 저쪽이다..\n");
+	printf("\n");
 	printf("\n");
 	printf("\n");
 	printf("===========================================================================\n");
@@ -719,6 +740,7 @@ void ending()
 	textcolor(12);
 	printf("                             (세번째 자리) 6..\n");
 	textcolor(15);
+	printf("\n");
 	printf("\n");
 	printf("\n");
 	printf("===========================================================================\n");
@@ -845,8 +867,8 @@ void Baseballgame() {
 
 			printf("\n\n\n\n");
 			printf("===========================================================================");
-			printf("\n\n\n"); 
-			
+			printf("\n\n\n");
+
 			textcolor(12);
 			printf("\t\t      비밀번호(네 번째 자리) : 0");
 			textcolor(15);
@@ -889,14 +911,15 @@ void baseball_main() {
 	system("pause");
 	system("cls");
 	Baseballgame();
-	
-	
+
+
 }
 
 //-------------------------------메인스토리 화면-------------------------------------
 
 //게임 시작 메인 UI
 void print_main() {
+	system("mode con:cols=75 lines=20");
 	textcolor(12);
 	printf("\n");
 	printf("                        Janbari Hotel Escape Game\n");
@@ -921,14 +944,16 @@ void print_talk()
 {
 	int i = 0;
 
-	char talk[4][500] = { {"껌뻑..껌뻑..어.. ? 여기가 어디지.. ? \n"} ,
-		{"(스피커) 지직....지지직 일어났는가? 너는 지금 10분 뒤에 무너지게 될 호텔안에 갇혀있다.\n"},
-		{"총 4개의 방안에 들어가 게임에서 이겨 네자리의 비밀번호를 얻어 탈출구에 걸려있는 좌물쇠를 풀고 밖으로 탈출하라.\n"},
-		{"명심해라 너한테 남은 시간은 10분 밖에 없다는 것을... 삐이익...\n"}
+	char talk[6][500] = { {"껌뻑..껌뻑..어.. ? 여기가 어디지.. ? \n"} ,
+		{"(스피커) 지직....지지직 일어났는가?\n"},
+		{"너는 지금 10분 뒤에 무너지게 될 호텔 안에 갇혀있다.\n"},
+		{"총 4개의 방안에 들어가 게임에서 이겨 네 자리의 비밀번호를 얻어라.\n"},
+		{"그 비밀번호로 탈출구에 걸려있는 좌물쇠를 풀고 밖으로 탈출할 수 있다.\n"},
+		{"명심해라 너한테 남은 시간은 10분밖에 없다는 것을... 삐이익...\n"}
 	};
-	while (i <= 3) {
+	while (i <= 5) {
 		textcolor(12);
-		printf("\n");
+		printf("\n\n");
 		printf("                        Janbari Hotel Escape Game\n");
 		textcolor(15);
 		printf("\n");
@@ -1029,14 +1054,10 @@ void roomselect() {
 
 int main()
 {
-
-	system("mode con:cols=75 lines=20");
-	
 	print_main();
 	system("cls");
-
-	PlaySound(TEXT("bgm.wav"), NULL, SND_ASYNC | SND_LOOP); 
-	print_talk();	
+	PlaySound(TEXT("bgm.wav"), NULL, SND_ASYNC | SND_LOOP);
+	print_talk();
 	roomselect();
-	
+
 }
