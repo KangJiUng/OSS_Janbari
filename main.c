@@ -220,7 +220,7 @@ void Ending()
         system("cls");
 	}
 }
-void Fail(){
+/*void Fail(){
     system("cls");
     printf("\n");
     printf("\n");
@@ -230,7 +230,7 @@ void Fail(){
     printf("\n");
     printf("===========================================================================\n");
     printf("\n\n");
-}
+}*/
 
 void ck() {
 	while (1) {
@@ -241,9 +241,11 @@ void ck() {
 		scanf("%d", &p1);
 		if (p1==3760) {
 			Ending();
-		}else{
-			Fail();
 		}
+		break;
+		/*else{
+			Fail();
+		}*/
 	}
 }
 
