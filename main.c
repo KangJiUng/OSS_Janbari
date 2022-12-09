@@ -379,7 +379,7 @@ void Correct(const int score)
 	Sleep(1000);
 	roomselect();
 }
-
+//점수 15점 이상이 안되었을 때 화면
 void DrawGameOver(const int score)
 {
 	system("cls");
