@@ -286,7 +286,7 @@ void intro()
 	printf("\n");
 	printf("====================================================================================================\n");
 	printf("\n");
-	printf("                                점프하여 장애물을 피하시오. (점프:z)\n");
+	printf("                                점프하여 장애물을 피하시오. (점프:1)\n");
 	printf("                                        - 최소 15점 이상 -\n");
 	printf("\n");
 	printf("                                            GOOD LUCK..\n\n");
@@ -443,7 +443,7 @@ void dinosaur_main()
 			if (isCollision(treeX, dinoY))
 				break;
 
-			if (GetKeyDown() == 'z' && isBottom)
+			if (GetKeyDown() == '1' && isBottom)
 			{
 				isJumping = true;
 				isBottom = false;
