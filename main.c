@@ -301,7 +301,7 @@ void GotoXY(int x, int y)
 
 
 
-
+// 공룡게임 콘솔창 설정
 void SetConsoleView()
 {
 	system("mode con:cols=100 lines=25");
