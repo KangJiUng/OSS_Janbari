@@ -363,7 +363,7 @@ void DrawTree(int treeX)
 	printf(" $$ ");
 }
 
-//충돌 했을때 화면 보여줌
+//점수 15점 이상이 되었을 때 화면
 void Correct(const int score)
 {
 	system("cls");
