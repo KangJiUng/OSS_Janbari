@@ -949,6 +949,32 @@ void print_talk()
 		system("cls");
 	}
 }
+//----------------------------------타이머----------------------------------------
+void time_ending()
+{
+	int hour = 9, min = 59;
+	for (int i = min; i > 55; i--) {
+
+		printf("\n");
+		printf("\n");
+		printf("\n");
+		printf("\n\n===========================================================================\n");
+		printf("\n");
+		printf("\n");
+		printf("\n");
+		printf("\t\x1b[31m                         9 : %d\x1b[0m\n", i);
+		printf("\n");
+		printf("\n");
+		printf("\n");
+		printf("===========================================================================\n");
+		printf("\n");
+
+		Beep(380, 200);
+		Sleep(1000);
+
+		system("cls");
+	}
+}
 //-------------------------------방선택화면----------------------------------------
 void roomselect() {
 
@@ -1024,7 +1050,7 @@ int main()
 {
 	print_main();
 	system("cls");
-	PlaySound(TEXT("bgm.wav"), NULL, SND_ASYNC | SND_LOOP);
 	print_talk();
+	time_ending();
+	PlaySound(TEXT("bgm.wav"), NULL, SND_ASYNC | SND_LOOP);
 	roomselect();
-}
