@@ -133,9 +133,8 @@ void intro_engame() {
 
 	printf("\n");
 	printf("\n");
-	textcolor(12);
-	printf("\t\t\t\t   201호\n");
-	printf("\t\t           사자성어 네글자 퀴즈\n");
+	printf("\t\t\t\t\x1b[31m   201호\x1b[0m\n");
+	printf("\t\t\x1b[31m           사자성어 네글자 퀴즈\x1b[0m\n");
 	textcolor(15);
 	printf("\n");
 	printf("===========================================================================\n");
@@ -156,9 +155,7 @@ void engame_ending() {
 	system("cls");
 	printf("\n\n\n===========================================================================\n\n\n\n");
 	printf("                             이걸 다 맞혔어?...\n");
-	textcolor(12);
-	printf("                        비밀번호(첫 번째 자리) : 3\n\n\n\n");
-	textcolor(15);
+	printf("\x1b[31m                        비밀번호(첫 번째 자리) : 3\x1b[0m\n\n\n\n");
 	printf("===========================================================================\n\n\n");
 	Sleep(1000);
 	roomselect();
@@ -180,8 +177,7 @@ void Password() {
 	system("cls");
 	printf("\n");
 	printf("\n");
-	textcolor(12);
-	printf("\t\t         Janbari Hotel Escape Game\n\n\n");
+	printf("\t\t\x1b[31m         Janbari Hotel Escape Game\x1b[0m\n\n\n");
 	textcolor(15);
 	printf("\t\t       -----------------------------\n");
 	printf("\t\t       |             |             |\n");
@@ -211,8 +207,7 @@ void Ending()
 
 	while (i <= 5) {
 		printf("\n");
-		textcolor(12);
-		printf("\t\t         Janbari Hotel Escape Game\n\n\n");
+		printf("\t\t\x1b[31m         Janbari Hotel Escape Game\x1b[0m\n\n\n");
 		textcolor(15);
 		printf("\n");
 		printf("\n");
@@ -263,9 +258,9 @@ void ck() {
 		scanf("%d", &p1);
 
 		if (p1 == 3760) {
-				Ending();
-				print_main();
-			}
+			Ending();
+			print_main();
+		}
 	}
 }
 
@@ -279,10 +274,8 @@ void intro()
 {
 	printf("\n");
 	printf("\n");
-	textcolor(12);
-	printf("                                               202호\n");
-	printf("                                             공룡 게임\n");
-	textcolor(15);
+	printf("\x1b[31m                                               202호\x1b[0m\n");
+	printf("\x1b[31m                                             공룡 게임\x1b[0m\n");
 	printf("\n");
 	printf("====================================================================================================\n");
 	printf("\n");
@@ -378,11 +371,9 @@ void Correct(const int score)
 	printf("====================================================================================================\n");
 	printf("\n\n\n");
 	printf("                                     축하한다! 어서 탈출하러 가라!");
-	printf("\n\n                                             SCORE : %d", score);
-	textcolor(12);
-	printf("\n\n                                      비밀번호(두 번째 자리) : 7");
+	printf("\n\n                                             SCORE : %d\x1b[0m", score);
+	printf("\n\n\x1b[31m                                      비밀번호(두 번째 자리) : 7");
 	printf("\n\n\n");
-	textcolor(15);
 	printf("====================================================================================================\n\n\n\n\n");
 	Sleep(1000);
 	roomselect();
@@ -395,8 +386,7 @@ void DrawGameOver(const int score)
 	textcolor(15);
 	printf("====================================================================================================\n");
 	printf("\n\n\n");
-	textcolor(12);
-	printf("                                      점프실력을 키워오시오 ㅋ");
+	printf("       \x1b[31m                               점프실력을 키워오시오 ㅋ\x1b[0m");
 	printf("\n\n                                             SCORE : %d", score);
 	printf("\n\n\n");
 	textcolor(15);
@@ -620,13 +610,10 @@ void sing_main()
 {
 	printf("\n");
 	printf("\n");
-	textcolor(12);
-	printf("\t\t\t\t   203호\n");
-	printf("\t\t         ♬ 노래가사 맞히기 게임 ♬ \n");
-	textcolor(15);
+	printf("\t\t\t\t\x1b[31m   203호\x1b[0m\n");
+	printf("\t\t   \x1b[31m      ♬ 노래가사 맞히기 게임 ♬\x1b[0m \n");
 	printf("\n");
 	printf("===========================================================================\n");
-	textcolor(15);
 	printf("\n");
 	printf("\n");
 	printf("         \t  ♪ 빈칸에 알맞은 노래 가사를 넣으세요\n");
@@ -649,9 +636,7 @@ void sing_answer(int count, sing_info sing, int random)
 {
 	printf("\n");
 	printf("\n");
-	textcolor(12);
-	printf("   203호\t\t    Score :   %d / %d      \n", count, 5);
-	textcolor(15);
+	printf("\x1b[31m   203호\t\t    Score :   %d / %d \x1b[0m     \n", count, 5);
 	printf("\n");
 	printf("===========================================================================\n");
 	printf("\n");
@@ -693,15 +678,13 @@ void fail_question()
 	printf("\n");
 	printf("\n");
 	printf("===========================================================================\n");
-	textcolor(12);
 	printf("\n");
 	printf("\n");
 	printf("\n");
-	printf("                      틀렸다.. 호텔이 무너져 내린다....\n");
+	printf("\x1b[31m                      틀렸다.. 호텔이 무너져 내린다....\x1b[0m\n");
 	printf("\n");
 	printf("\n");
 	printf("\n");
-	textcolor(15);
 	printf("===========================================================================\n");
 	printf("\n");
 }
@@ -737,16 +720,14 @@ void ending()
 	printf("\n");
 	printf("\n");
 	printf("                        어이!! 비밀번호 가져가라...\n");
-	textcolor(12);
-	printf("                             (세번째 자리) 6..\n");
-	textcolor(15);
+	printf("         \x1b[31m                    (세번째 자리) 6..\x1b[0m\n");
 	printf("\n");
 	printf("\n");
 	printf("\n");
 	printf("===========================================================================\n");
 	textcolor(15);
 	printf("\n");
-	Sleep(2800);
+	Sleep(1000);
 	roomselect();
 }
 
@@ -868,10 +849,7 @@ void Baseballgame() {
 			printf("\n\n\n\n");
 			printf("===========================================================================");
 			printf("\n\n\n");
-
-			textcolor(12);
-			printf("\t\t      비밀번호(네 번째 자리) : 0");
-			textcolor(15);
+			printf("\t\t\x1b[31m      비밀번호(네 번째 자리) : 0\x1b[0m");
 			printf("\n\n\t\t         시간은 흐르고 있다...");
 			printf("\n\n\n");
 			printf("===========================================================================\n\n\n\n\n");
@@ -885,10 +863,8 @@ void baseball_main() {
 	system("mode con:cols=75 lines=20");
 	printf("\n");
 	printf("\n");
-	textcolor(12);
-	printf("\t\t\t\t   204호\n");
-	printf("\t\t\t      숫자 야구 게임  \n");
-	textcolor(15);
+	printf("\t\t\t\t\x1b[31m   204호\x1b[0m\n");
+	printf("\t\t\t\x1b[31m      숫자 야구 게임\x1b[0m  \n");
 	printf("\n");
 	printf("==========================================================================\n");
 	printf("\n");
@@ -920,26 +896,24 @@ void baseball_main() {
 //게임 시작 메인 UI
 void print_main() {
 	system("mode con:cols=75 lines=20");
-	textcolor(12);
 	printf("\n");
-	printf("                        Janbari Hotel Escape Game\n");
+	printf("\x1b[31m                        Janbari Hotel Escape Game\x1b[0m\n");
 	printf("\n");
-	printf("                                    *\n");
-	printf("                                   ===\n");
-	printf("                             =J=A=N=B=A=R=I=\n");
-	printf("                          =====================\n");
-	printf("                          = -- -- -- -- -- -- =\n");
-	printf("                          = -- -- -- -- -- -- =\n");
-	printf("                          = -- -- -- -- -- -- =\n");
-	printf("                          = -- -- -- -- -- -- =\n");
-	printf("                          = -- -- |   | -- -- =\n");
-	printf("                        =========================\n");
-	textcolor(15);
+	printf("\x1b[31m                                    *\x1b[0m\n");
+	printf("\x1b[31m                                   ===\x1b[0m\n");
+	printf("\x1b[31m                             =J=A=N=B=A=R=I=\x1b[0m\n");
+	printf("\x1b[31m                          =====================\x1b[0m\n");
+	printf("\x1b[31m                          = -- -- -- -- -- -- =\x1b[0m\n");
+	printf("\x1b[31m                          = -- -- -- -- -- -- =\x1b[0m\n");
+	printf("\x1b[31m                          = -- -- -- -- -- -- =\x1b[0m\n");
+	printf("\x1b[31m                          = -- -- -- -- -- -- =\x1b[0m\n");
+	printf("\x1b[31m                          = -- -- |   | -- -- =\x1b[0m\n");
+	printf("\x1b[31m                        =========================\x1b[0m\n");
 	printf("===========================================================================\n");
 	printf("\n");
 	system("pause");
-	textcolor(15);
 }
+
 void print_talk()
 {
 	int i = 0;
@@ -952,9 +926,8 @@ void print_talk()
 		{"명심해라 너한테 남은 시간은 10분밖에 없다는 것을... 삐이익...\n"}
 	};
 	while (i <= 5) {
-		textcolor(12);
 		printf("\n\n");
-		printf("                        Janbari Hotel Escape Game\n");
+		printf("\x1b[31m                        Janbari Hotel Escape Game\x1b[0m\n");
 		textcolor(15);
 		printf("\n");
 		printf("\n");
@@ -976,28 +949,6 @@ void print_talk()
 		system("cls");
 	}
 }
-//----------------------------------타이머----------------------------------------
-void time_ending()
-{
-    int hour = 9, min = 59;
-    for (int i = min; i > 55; i--) {
-        printf("\n");
-        printf("\n");
-        printf("\n");
-        printf("===========================================================================\n");
-        printf("\n");
-        printf("\n");
-        printf("\n");
-        printf("                         9 : %d\n", i);
-        printf("\n");
-        printf("\n");
-        printf("\n");
-        printf("===========================================================================\n");
-        printf("\n");
-        Sleep(1000);
-        system("cls");
-    }
-}
 //-------------------------------방선택화면----------------------------------------
 void roomselect() {
 
@@ -1006,37 +957,32 @@ void roomselect() {
 	system("mode con:cols=75 lines=20");
 	printf("\n");
 	printf("\n");
-	textcolor(12);
-	printf("\t\t         Janbari Hotel Escape Game\n\n\n");
+	printf("\t\t\x1b[31m         Janbari Hotel Escape Game\x1b[0m\n\n\n");
 	textcolor(15);
 	printf("\t=========== \t=========== \t=========== \t===========\n\n");
 	if (c1 == 0) {
-		textcolor(12);
-		printf("\t    201");
+		printf("\t\x1b[31m    201\x1b[0m");
 	}
 	else {
 		textcolor(0);
 		printf("\t    201");
 	}
 	if (c2 == 0) {
-		textcolor(12);
-		printf("\t\t    202");
+		printf("\t\t\x1b[31m    202\x1b[0m");
 	}
 	else {
 		textcolor(0);
 		printf("\t\t    202");
 	}
 	if (c3 == 0) {
-		textcolor(12);
-		printf("\t\t    203");
+		printf("\t\t\x1b[31m    203\x1b[0m");
 	}
 	else {
 		textcolor(0);
 		printf("\t\t    203");
 	}
 	if (c4 == 0) {
-		textcolor(12);
-		printf("\t\t    204\n\n");
+		printf("\t\t\x1b[31m    204\x1b[0m\n\n");
 	}
 	else {
 		textcolor(0);
@@ -1081,5 +1027,4 @@ int main()
 	PlaySound(TEXT("bgm.wav"), NULL, SND_ASYNC | SND_LOOP);
 	print_talk();
 	roomselect();
-
 }
