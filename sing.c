@@ -3,35 +3,56 @@
 #include <Windows.h>
 #include <string.h>
 #include <stdlib.h>
+#include <time.h>
 
+#define DELAY 120000
 #define NUMBER 256
 
+// ë…¸ë˜ ì •ë³´ë¥¼ ë‹´ëŠ” êµ¬ì¡°ì²´
 typedef struct sing {
 	char singer[NUMBER];
 	char lyrics[NUMBER];
 	char lyrics1[NUMBER];
 	char answer1[NUMBER];
+	char hint[NUMBER];
 }sing_info;
 
+// ì»¤ì„œë¥¼ ì´ë™í•˜ëŠ” í•¨ìˆ˜
+void GotoXY1(int x, int y)
+{
+	COORD Pos = { x,y };
+	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), Pos);
+}
+// ê¸€ì ìƒ‰ê¹”ì„ ë°”ê¾¸ëŠ” í•¨ìˆ˜
 void textcolor(int colorNum) {
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), colorNum);
 }
+void print_main();
 void sing_main();
 void correct_question();
 void fail_question();
+void end_question();
 void sing_answer(int count, sing_info sing,int random);
+void hint(sing_info sing);
+void ending();
+void ending_timer();
 
 sing_info sings[50];
 
+// ë©”ì¸ í•¨ìˆ˜
 int main() {
-	system("mode con:cols=55 lines=20");
+	//ì½˜ì†” í¬ê¸° ì„¤ì •
+	system("mode con:cols=75 lines=20");
+
 	char enter = '\n';
-	char answer[5][50];
+	char answer[5][50];		
+	int hint1[5];
 	int i = 0, j = 0, count = 1, count1 = 0;
 
 	FILE* fp;
-	fp = fopen("³ë·¡°¡»ç.txt", "r");
-
+	fp = fopen("ë…¸ë˜ê°€ì‚¬.txt", "r");
+		
+	//sing.txtíŒŒì¼ì„ ì½ì–´ì™€ êµ¬ì¡°ì²´ ë°°ì—´ì— ì €ì¥
 	if (fp != NULL) {
 		char buffer[NUMBER];
 		sing_info sing;
@@ -43,124 +64,206 @@ int main() {
 			strcpy(sing.lyrics, ptr);
 			ptr = strtok(NULL, ",");
 			strcpy(sing.lyrics1, ptr);
-			ptr = strtok(NULL, "\n");
+			ptr = strtok(NULL, ",");
 			strcpy(sing.answer1, ptr);
+			ptr = strtok(NULL, "\n");
+			strcpy(sing.hint, ptr);
 			sings[count1++] = sing;
 		}
 		fclose(fp);
 
-		sing_main();
+		sing_main(); //ë©”ì¸í™”ë©´ ì¶œë ¥
+		srand(time(NULL));
+
+		//ëœë¤ì˜ ë¬¸ì œ ë²ˆí˜¸ë¥¼ ë°°ì—´ì— ì €ì¥í•¨
+		for (i = 0; i < 5; i++) {
+			int random = rand() % 21;
+			hint1[i] = random;
+		}
+
 		scanf("%c", &enter);
 		if (enter == '\n') {
-			while (count <= 5) {
-				srand(time(NULL));
-				int random = rand() % 21;
-
-				system("cls");
-				sing_answer(count, sing,random);
-				printf("Á¤´äÀ» ÀÔ·ÂÇÏ¼¼¿ä..  ");
+			while (count<=5) {
+				system("cls"); //ë©”ì¸í™”ë©´ ì§€ìš°ê¸°
+				sing_answer(count, sing, hint1[j]); //ë…¸ë˜ê°€ì‚¬ ë§íˆê¸° í™”ë©´
+				printf("ì •ë‹µì„ ì…ë ¥í•˜ì„¸ìš”..  ");
 				gets(answer[j]);
 				system("cls");
-				if (strcmp(answer[j], sings[random].answer1) == 0) {
+
+				//ì •ë‹µì¼ë•Œ
+				if (strcmp(answer[j], sings[hint1[j]].answer1) == 0) {
 					correct_question();
-					Sleep(3000);
+					Sleep(1000);
 					system("cls");
 					j++;
 					count++;
 				}
+				//íŒíŠ¸ë¥¼ ì›í•  ë•Œ
+				else if (strcmp(answer[j], "1") == 0) {
+					sing_answer(count, sing, hint1[j]);
+					hint(sing, hint1[j]);
+					Sleep(1000);
+						system("cls");			
+				}
+					//ì˜¤ë‹µì¼ë•Œ
 				else {
 					fail_question();
-					Sleep(3000);
+					Sleep(1000);
 					system("cls");
 				}
 			}
 		}
 	}
 	else {
-		printf("ÆÄÀÏ Á¸Àç x");
+		printf("íŒŒì¼ ì¡´ì¬ x");
 		return;
 	}
-	for (i = 0; i < 5; i++) {
-		printf("%s \n", answer[i]);
-	}
-	return 0;
+	end_question();
+	Sleep(2000);
+	system("cls");
+	ending();
+	
+		
+		
 }
-//³ë·¡°¡»ç ¸ŞÀÎ
-void sing_main() {
-	printf("\n");
-	printf("\n");
-	textcolor(12);
-	printf("                         203È£                         \n");
-	printf("                   ³ë·¡ °¡»ç ¸ÂÈ÷±â  \n");
-	textcolor(15);
-	printf("\n");
-	printf("=====================================================\n");
-	printf("\n");
-	printf("         ºóÄ­¿¡ ¾Ë¸ÂÀº ³ë·¡ °¡»ç¸¦ ³ÖÀ¸¼¼¿ä\n");
-	printf("          ÃÑ ´Ù¼¸ ¹®Á¦¸¦ ¸ÂÃß¸é Åë°úÀÔ´Ï´Ù\n");
-	printf("         ÈùÆ®´Â ÇÑ ¹®Á¦´ç ÇÑ¹ø¸¸ Á¦°øµË´Ï´Ù \n");
-	printf("\n");
-	printf("                    GOOD LUCK..\n");
-	printf("=====================================================\n");
-	printf("\n");
-	printf("	   °è¼ÓÇÏ·Á¸é Enter¸¦ ´©¸£¼¼¿ä..\n");
+//ë…¸ë˜ê°€ì‚¬ ë©”ì¸ UI
+void sing_main() 
+{
+		printf("\n");
+		textcolor(12);
+		printf("\t\t\t\t   203í˜¸\n");
+		printf("\t\t         â™¬ ë…¸ë˜ê°€ì‚¬ ë§íˆê¸° ê²Œì„ â™¬\n");
+		textcolor(15);
+		printf("\n");
+		printf("===========================================================================\n");
+		textcolor(15);
+		printf("\n");
+		printf("\n");
+		printf("         \t  â™ª ë¹ˆì¹¸ì— ì•Œë§ì€ ë…¸ë˜ ê°€ì‚¬ë¥¼ ë„£ìœ¼ì„¸ìš”\n");
+		printf("         \t  â™ª ì´ 5 ë¬¸ì œë¥¼ ë§ì¶”ë©´ í†µê³¼ì…ë‹ˆë‹¤\n");
+		printf("         \t  â™ª íŒíŠ¸ëŠ” í•œ ë¬¸ì œë‹¹ í•œë²ˆë§Œ ì œê³µë©ë‹ˆë‹¤ \n");
+		printf("\n");
+		printf("\n");
+		printf(" \t\t\t     â™¬ GOOD LUCK..\n");
+		printf("===========================================================================\n");
+		printf("\n");
+		printf("\t\t       ê³„ì†í•˜ë ¤ë©´ Enterë¥¼ ëˆ„ë¥´ì„¸ìš”..\n");
 }
-
-//³ë·¡°¡»ç ¸ÂÈ÷±â
+//íŒíŠ¸ ì œê³µí™”ë©´
+void hint(sing_info sing, int random) {
+	GotoXY1(0, 16);
+	printf("%s", sings[random].hint);
+}
+//ë…¸ë˜ê°€ì‚¬ ë§íˆê¸° UI
 void sing_answer(int count,sing_info sing,int random)
 {	
 	printf("\n");
 	printf("\n");
 	textcolor(12);
-	printf("   203È£         Score :   %d / %d      \n", count, 5);
+	printf("   203í˜¸\t\t    Score :   %d / %d      \n", count, 5);
 	textcolor(15);
 	printf("\n");
-	printf("=======================================================\n");
+	printf("===========================================================================\n");
 	printf("\n");
-	printf("%s  \n",sings[random].singer);
+	printf("\t\t   â™¬ %s â™¬\n",sings[random].singer); //íŒŒì¼ì—ì„œ ê°€ìˆ˜ì™€ ë…¸ë˜ ì œëª©ì„ ë¶ˆëŸ¬ì˜¨ ê²°ê³¼
 	printf("\n");
-	printf("%s\n",sings[random].lyrics);
-	printf("%s\n", sings[random].lyrics1);
+	printf("\t\t   %s\n",sings[random].lyrics);  //íŒŒì¼ì—ì„œ ë…¸ë˜ ê°€ì‚¬ë¥¼ ë¶ˆëŸ¬ì˜´
+	printf("\t\t   %s\n", sings[random].lyrics1); //íŒŒì¼ì—ì„œ ë…¸ë˜ ê°€ì‚¬ë¥¼ ë¶ˆëŸ¬ì˜´
 	printf("\n");
 	printf("\n");
-	printf("             ÈùÆ®¸¦ º¸·Á¸é 1À» ´©¸£¼¼¿ä\n");
-	printf("=======================================================\n");
+	printf("\t\t   íŒíŠ¸ë¥¼ ê°„ì ˆíˆ ì›í•œë‹¤ë©´ 1ì„ ëˆ„ë¥´ì„¸ìš”\n");
+	printf("\n");
+	printf("===========================================================================\n");
 	printf("\n");
 }
-//Á¤´äÈ­¸é
+//ì •ë‹µí™”ë©´ UI
 void correct_question() 
 {
 	printf("\n");
 	printf("\n");
-	textcolor(12);
-	textcolor(15);
 	printf("\n");
-	printf("=======================================================\n");
+	printf("===========================================================================\n");
 	printf("\n");
 	printf("\n");
 	printf("\n");
-	printf("              Á¤´äÀÌ´Ù.....ÈûÀ» ³»¶ó..\n");
+	printf("                         ì •ë‹µì´ë‹¤.....í˜ì„ ë‚´ë¼..\n");
 	printf("\n");
 	printf("\n");
 	printf("\n");
-	printf("=======================================================\n");
+	printf("===========================================================================\n");
 	printf("\n");
 }
-//¿À´äÈ­¸é
+//ì˜¤ë‹µí™”ë©´ UI
 void fail_question()
 {
 	printf("\n");
 	printf("\n");
 	printf("\n");
 	textcolor(12);
-	printf("=======================================================\n");
+	printf("===========================================================================\n");
 	printf("\n");
 	printf("\n");
 	printf("\n");
-	printf("            Æ²·È´Ù.. È£ÅÚÀÌ ¹«³ÊÁ® ³»¸°´Ù....\n");
+	printf("                      í‹€ë ¸ë‹¤.. í˜¸í…”ì´ ë¬´ë„ˆì ¸ ë‚´ë¦°ë‹¤....\n");
 	printf("\n");
 	printf("\n");
 	printf("\n");
-	printf("=======================================================\n");
+	printf("===========================================================================\n");
 	printf("\n");
 }
+
+//ë¬¸ì œ ë‹¤ ë§ì¶”ì—ˆì„ì‹œ UI
+	void end_question()
+	{
+		printf("\n");
+		printf("\n");
+		printf("\n");
+		textcolor(12);
+		printf("===========================================================================\n");
+		printf("\n");
+		printf("\n");
+		printf("\n");
+		printf("                        ë‹¤ì„¯ ë¬¸ì œë¥¼ ëª¨ë‘ ë§ì¶˜ê±´ê°€..\n");
+		printf("                           ë‚˜ê°€ëŠ” ê¸¸ì€ ì €ìª½ì´ë‹¤..\n");
+		printf("\n");
+		printf("\n");
+		printf("===========================================================================\n");
+		textcolor(15);
+		printf("\n");
+	}
+	//ë¹„ë°€ë²ˆí˜¸ íšë“ í•¨ìˆ˜
+	void ending()
+	{
+		printf("\n");
+		printf("\n");
+		printf("\n");
+		textcolor(12);
+		printf("===========================================================================\n");
+		printf("\n");
+		printf("\n");
+		printf("\n");
+		printf("                        ì–´ì´!! ë¹„ë°€ë²ˆí˜¸ ê°€ì ¸ê°€ë¼...\n");
+		printf("                             (ì„¸ë²ˆì§¸ ìë¦¬) 6..\n");
+		printf("\n");
+		printf("\n");
+		printf("===========================================================================\n");
+		textcolor(15);
+		printf("\n");
+	}
+	//ì‹œê°„ì´ ë‹¤ ì§€ë‚˜ë©´ í‘œì‹œë˜ëŠ” UI
+	void ending_timer()
+	{
+		printf("\n");
+		printf("\n");
+		printf("\n");
+		printf("===========================================================================\n");
+		printf("\n");
+		printf("\n");
+		printf("\n");
+		printf("                         ì‹œê°„ì´ ë‹¤ ì§€ë‚¬ë‹¤.. ë„Œ ì£½ëŠ”ë‹¤..\n");
+		printf("\n");
+		printf("\n");
+		printf("\n");
+		printf("===========================================================================\n");
+		printf("\n");
+	}
