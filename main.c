@@ -469,7 +469,7 @@ void dinosaur_main()
 			DrawDino(dinoY);
 			DrawTree(treeX);
 
-			//(v2.0)
+			//1초에 1점씩 올라가도록 함
 			curr = clock();
 			if (((curr - start) / CLOCKS_PER_SEC) >= 1)
 			{
