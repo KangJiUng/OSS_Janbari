@@ -78,7 +78,7 @@ void save_problem() {
 
 void Right() {
 	system("cls");
-	printf("\n\n\n===========================================================================\n\n\n\n\n");
+	printf("\n\n\n\n===========================================================================\n\n\n\n\n");
 	printf("                              욜 ㅋ 쫌 치는데?\n\n\n\n\n");
 	printf("===========================================================================\n\n\n");
 	Sleep(1000);
@@ -86,7 +86,7 @@ void Right() {
 
 void Wrong() {
 	system("cls");
-	printf("\n\n\n===========================================================================\n\n\n\n\n");
+	printf("\n\n\n\n===========================================================================\n\n\n\n\n");
 	printf("                            이러다가 다~ 죽어~!\n\n\n\n\n");
 	printf("===========================================================================\n\n\n");
 	Sleep(1000);
@@ -105,15 +105,21 @@ void eng_game() {
 		temp = strtok(NULL, "\n");
 		while (1) {
 			system("cls");
-
-			printf("\x1b[31m                              ROUND : %d/5    \x1b[0m\n\n\n\n", k + 1);
-			printf("                          %s", prob);
-
+			printf("\n");
+			printf("\n");
+			printf("\x1b[31m   201호\t\t    Score :   %d / 5 \x1b[0m     \n", k+1);
+			printf("\n");
+			printf("===========================================================================\n");
+			printf("\n\n\n");
+			printf("\t\t\t        %s", prob);
 			for (int i = 0; i < strlen(temp); i++) {
 				printf("_");
 			}
 			printf("\n\n                     %s\n\n\n\n", problem[rand_idx[k]].hint);
-			printf("빈칸을 입력하시오...");
+			printf("===========================================================================\n");
+			printf("\n");
+
+			printf("빈칸을 입력하시오... ");
 			scanf("%s", answ);
 			if (!strcmp(temp, answ)) {
 				Right();
@@ -134,7 +140,7 @@ void intro_engame() {
 	printf("\n");
 	printf("\n");
 	printf("\t\t\t\t\x1b[31m   201호\x1b[0m\n");
-	printf("\t\t\x1b[31m           사자성어 네글자 퀴즈\x1b[0m\n");
+	printf("\t\t\x1b[31m           사자성어 네 글자 퀴즈\x1b[0m\n");
 	textcolor(15);
 	printf("\n");
 	printf("===========================================================================\n");
@@ -206,7 +212,7 @@ void Ending()
 	};
 
 	while (i <= 5) {
-		printf("\n");
+		printf("\n\n");
 		printf("\t\t\x1b[31m         Janbari Hotel Escape Game\x1b[0m\n\n\n");
 		textcolor(15);
 		printf("\n");
@@ -271,7 +277,7 @@ void ck() {
 
 
 //공룡게임 설명 화면
-void intro() 
+void intro()
 {
 	printf("\n");
 	printf("\n");
@@ -280,7 +286,7 @@ void intro()
 	printf("\n");
 	printf("====================================================================================================\n");
 	printf("\n");
-	printf("                                점프하여 장애물을 피하시오. (점프:1)\n");
+	printf("                                점프하여 장애물을 피하시오. (\x1b[31m점프: 1\x1b[0m)\n");
 	printf("                                        - 최소 15점 이상 -\n");
 	printf("\n");
 	printf("                                            GOOD LUCK..\n\n");
@@ -372,9 +378,9 @@ void Correct(const int score)
 	printf("====================================================================================================\n");
 	printf("\n\n\n");
 	printf("                                     축하한다! 어서 탈출하러 가라!");
-	printf("\n\n                                             SCORE : %d\x1b[0m", score);
-	printf("\n\n\x1b[31m                                      비밀번호(두 번째 자리) : 7");
-	printf("\n\n\n");
+	printf("\n\n                                             SCORE : %d", score);
+	printf("\n\n\x1b[31m                                     비밀번호(두 번째 자리) : 7\x1b[0m");
+	printf("\n\n\n\n");
 	printf("====================================================================================================\n\n\n\n\n");
 	Sleep(1000);
 	roomselect();
@@ -387,10 +393,9 @@ void DrawGameOver(const int score)
 	textcolor(15);
 	printf("====================================================================================================\n");
 	printf("\n\n\n");
-	printf("       \x1b[31m                               점프실력을 키워오시오 ㅋ\x1b[0m");
-	printf("\n\n                                             SCORE : %d", score);
-	printf("\n\n\n");
-	textcolor(15);
+	printf("       \x1b[31m                              점프실력을 키워오시오 ㅋ\x1b[0m");
+	printf("\n\n                                            SCORE : %d", score);
+	printf("\n\n\n\n");
 	printf("====================================================================================================\n\n\n\n\n");
 	Sleep(1000);
 	void dinosaur_main();
@@ -569,7 +574,7 @@ void sings_main() {
 			while (count <= 5) {
 				system("cls"); //메인화면 지우기
 				sing_answer(count, sing, hint1[j]); //노래가사 맞히기 화면
-				printf("정답을 입력하세요..  ");
+				printf("정답을 입력하세요...  ");
 				gets(answer[j]);
 				system("cls");
 
@@ -785,11 +790,11 @@ void Baseballgame() {
 	ranNums = CreateRandomNums();
 
 	//테스트 코드
-	printf("정답 : ");
+	/*printf("정답 : ");
 	for (int i = 0; i < 4; i++) {
 		printf("%d", ranNums[i]);
 	}
-	printf("\n");
+	printf("\n");*/
 
 	while (1) {
 		printf("[%d회차] 4자리 숫자를 입력하세요. ex)1 2 3 4: ", cnt);
@@ -919,12 +924,12 @@ void print_talk()
 {
 	int i = 0;
 
-	char talk[6][500] = { {"껌뻑..껌뻑..어.. ? 여기가 어디지.. ? \n"} ,
-		{"(스피커) 지직....지지직 일어났는가?\n"},
-		{"너는 지금 5분 뒤에 무너지게 될 호텔 안에 갇혀있다.\n"},
-		{"총 4개의 방안에 들어가 게임에서 이겨 네 자리의 비밀번호를 얻어라.\n"},
-		{"그 비밀번호로 탈출구에 걸려있는 좌물쇠를 풀고 밖으로 탈출할 수 있다.\n"},
-		{"명심해라 너한테 남은 시간은 5분밖에 없다는 것을... 삐이익...\n"}
+	char talk[6][500] = { {" 껌뻑..껌뻑..어.. ? 여기가 어디지.. ? \n"} ,
+		{" (스피커) 지직....지지직 일어났는가?\n"},
+		{" 너는 지금 5분 뒤에 무너지게 될 호텔 안에 갇혀있다.\n"},
+		{" 총 4개의 방 안에 들어가 게임에서 이겨 네 자리의 비밀번호를 얻어라.\n"},
+		{" 그 비밀번호로 탈출구에 걸려있는 좌물쇠를 풀고 밖으로 탈출할 수 있다.\n"},
+		{" 명심해라 너한테 남은 시간은 5분밖에 없다는 것을... 삐이익...\n"}
 	};
 	while (i <= 5) {
 		printf("\n\n");
@@ -963,7 +968,7 @@ void time_ending()
 		printf("\n");
 		printf("\n");
 		printf("\n");
-		printf("\t\x1b[31m                         5 : %d\x1b[0m\n", i);
+		printf("\t\x1b[31m                         4 : %d\x1b[0m\n", i);
 		printf("\n");
 		printf("\n");
 		printf("\n");
@@ -1055,3 +1060,5 @@ int main()
 	time_ending();
 	PlaySound(TEXT("bgm.wav"), NULL, SND_ASYNC | SND_LOOP);
 	roomselect();
+
+}
