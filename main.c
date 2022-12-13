@@ -212,6 +212,8 @@ void Ending()
 	};
 
 	while (i <= 5) {
+		if (i == 5)
+			PlaySound(NULL, 0, 0);
 		printf("\n\n");
 		printf("\t\t\x1b[31m         Janbari Hotel Escape Game\x1b[0m\n\n\n");
 		textcolor(15);
